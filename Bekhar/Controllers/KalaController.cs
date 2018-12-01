@@ -20,7 +20,8 @@ namespace Bekhar.Controllers
         // GET: Kala/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Kala item = ElasticEngine.GetAllKala().First();
+            return View(item);
         }
 
         // GET: Kala/Create

@@ -270,6 +270,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Kala\Create.cshtml" />
     <Content Include="Views\Kala\Index.cshtml" />
+    <Content Include="Views\Kala\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
