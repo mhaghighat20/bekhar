@@ -23,6 +23,14 @@ namespace Bekhar.Elastic
             return response.Documents.ToList();
         }
 
+        internal static Kala GetKalaById(string id)
+        {
+            var response = EsClient.GetInstance().Search<Kala>(s => s.Query(q => q.Ids(ids => ids.Values(new List<Id>() { id }))));
+            ValidateResponse(response);
+
+            return response.Hits.First().Source;
+        }
+
         private static void ValidateResponse(IResponse reponse)
         {
             if (!reponse.IsValid)
