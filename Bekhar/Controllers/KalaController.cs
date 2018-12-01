@@ -13,7 +13,8 @@ namespace Bekhar.Controllers
         // GET: Kala
         public ActionResult Index()
         {
-            return View();
+            List<Kala> items = ElasticEngine.GetAllKala();
+            return View(items);
         }
 
         // GET: Kala/Details/5

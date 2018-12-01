@@ -15,6 +15,13 @@ namespace Bekhar.Elastic
             ValidateResponse(response);
         }
 
+        internal static List<Kala> GetAllKala()
+        {
+            var response = EsClient.GetInstance().Search<Kala>();
+            ValidateResponse(response);
+
+            return response.Documents.ToList();
+        }
 
         private static void ValidateResponse(IResponse reponse)
         {
