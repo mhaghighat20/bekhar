@@ -1,0 +1,220 @@
+@font-face
+{
+    font-family: "B Yekan";
+    src: url("BYekan.ttf");
+}
+
+html{
+    height: 100%;
+}
+body
+{
+    padding-top: 3.5rem;
+    height: 100%;
+
+}
+
+.yekan
+{
+    font-family: "B Yekan";
+}
+
+
+
+/*** Navbar ***/
+
+/*.bk-navbar*/
+/*{*/
+    /*background-color: #03A9F4;*/
+    /*!*box-shadow: 0 0.05rem 0.5rem #FFFFFF;*!*/
+/*}*/
+
+/*.bk-navbar .navbar-brand*/
+/*{*/
+    /*text-decoration: none;*/
+    /*color: #FFFFFF;*/
+/*}*/
+
+/*.bk-btn-primary*/
+/*{*/
+    /*border-color: #FF5722;*/
+    /*color: #FFFFFF;*/
+    /*background-color: #FF5722;*/
+    /*font-family: "B Yekan";*/
+/*}*/
+
+/*!**/
+/*.navbar-btn:hover*/
+/*{*/
+    /*background-color: white;*/
+    /*color: #009eae;*/
+/*}*/
+/**!*/
+
+/*.bk-navbar .nav-link*/
+/*{*/
+    /*color: #FFFFFF;*/
+/*}*/
+
+/*.bk-navbar .nav-link:hover*/
+/*{*/
+    /*color:#B3E5FC;*/
+/*}*/
+
+.bk-nav-link
+{
+    color: #FFFFFF;
+}
+.bk-nav-link:hover
+{
+    color: #bf360c;
+}
+
+/*** Body ***/
+.wrapper
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+}
+
+
+
+
+
+
+
+/********** Sidebar ***********/
+.bk-sidebar
+{
+    min-width: 250px;
+    max-width: 250px;
+    background: #FFFFFF;
+    height: 100%;
+    padding-top: 1rem;
+    border-left: 1px #BDBDBD solid;
+    box-shadow: 0.3rem 0 0.8rem;
+}
+
+.bk-sidebar-header
+{
+    color: #757575;
+    text-align: center;
+}
+
+.bk-sidebar .sidebar-item
+{
+    margin-right: 1rem;
+    margin-left: 1rem;
+    border-bottom: 1px #E5E5E5 solid;
+    height: 3rem;
+}
+
+.bk-sidebar .sidebar-item:hover
+{
+    background-color: #F5F5F5;
+}
+
+
+
+
+
+
+/** Material Design icons **/
+.mdi::before {
+    font-size: 24px;
+    line-height: 14px;
+}
+.btn .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.btn-xs .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.btn-sm .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.dropdown-menu .mdi {
+    width: 18px;
+}
+.dropdown-menu .mdi::before {
+    position: relative;
+    top: 4px;
+    left: -8px;
+}
+.nav .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.navbar .navbar-toggle .mdi::before {
+    position: relative;
+    top: 4px;
+    color: #FFF;
+}
+.breadcrumb .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.breadcrumb a:hover {
+    text-decoration: none;
+}
+.breadcrumb a:hover span {
+    text-decoration: underline;
+}
+.alert .mdi::before {
+    position: relative;
+    top: 4px;
+    margin-right: 2px;
+}
+.input-group-addon .mdi::before {
+    position: relative;
+    top: 3px;
+}
+.navbar-brand .mdi::before {
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+}
+.list-group-item .mdi::before {
+    position: relative;
+    top: 3px;
+    left: -3px
+}
+
+
+
+
+
+
+
+
+
+@media (min-width: 0) {
+    .card-deck .card {
+        flex: 0 0 calc(100% - 30px);
+    }
+}
+@media (min-width: 576px) {
+    .card-deck .card {
+        flex: 0 0 calc(50% - 30px);
+    }
+}
+@media (min-width: 768px) {
+    .card-deck .card {
+        flex: 0 0 calc(33.3333333333% - 30px);
+    }
+}
+@media (min-width: 992px) {
+    .card-deck .card {
+        flex: 0 0 calc(25% - 30px);
+    }
+}
+@media (min-width: 1200px) {
+    .card-deck .card {
+        flex: 0 0 calc(20% - 30px);
+    }
+}
