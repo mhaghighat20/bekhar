@@ -1,10 +1,11 @@
 @font-face
 {
     font-family: "B Yekan";
-    src: url("BYekan.ttf");
+    src: url("../font/BYekan.ttf");
 }
 
-html{
+html
+{
     height: 100%;
 }
 body
@@ -16,50 +17,8 @@ body
 
 .yekan
 {
-    font-family: "B Yekan";
+    font-family: "B Yekan", serif;
 }
-
-
-
-/*** Navbar ***/
-
-/*.bk-navbar*/
-/*{*/
-    /*background-color: #03A9F4;*/
-    /*!*box-shadow: 0 0.05rem 0.5rem #FFFFFF;*!*/
-/*}*/
-
-/*.bk-navbar .navbar-brand*/
-/*{*/
-    /*text-decoration: none;*/
-    /*color: #FFFFFF;*/
-/*}*/
-
-/*.bk-btn-primary*/
-/*{*/
-    /*border-color: #FF5722;*/
-    /*color: #FFFFFF;*/
-    /*background-color: #FF5722;*/
-    /*font-family: "B Yekan";*/
-/*}*/
-
-/*!**/
-/*.navbar-btn:hover*/
-/*{*/
-    /*background-color: white;*/
-    /*color: #009eae;*/
-/*}*/
-/**!*/
-
-/*.bk-navbar .nav-link*/
-/*{*/
-    /*color: #FFFFFF;*/
-/*}*/
-
-/*.bk-navbar .nav-link:hover*/
-/*{*/
-    /*color:#B3E5FC;*/
-/*}*/
 
 .bk-nav-link
 {
@@ -86,17 +45,37 @@ body
 
 
 /********** Sidebar ***********/
-.bk-sidebar
+@media (min-width: 0)
 {
-    min-width: 250px;
-    max-width: 250px;
-    background: #FFFFFF;
-    height: 100%;
-    padding-top: 1rem;
-    border-left: 1px #BDBDBD solid;
-    box-shadow: 0.3rem 0 0.8rem;
+    .bk-sidebar
+    {
+        min-width: 250px;
+        max-width: 250px;
+        background: #FFFFFF;
+        height: 100%;
+        padding-top: 1rem;
+        border-left: 1px #BDBDBD solid;
+        box-shadow: 0.3rem 0 0.8rem;
+        margin-right: -250px;
+    }
+
 }
 
+
+@media (min-width: 576px)
+{
+    .bk-sidebar
+    {
+        min-width: 250px;
+        max-width: 250px;
+        background: #FFFFFF;
+        height: 100%;
+        padding-top: 1rem;
+        border-left: 1px #BDBDBD solid;
+        box-shadow: 0.3rem 0 0.8rem;
+        margin-right: 0;
+    }
+}
 .bk-sidebar-header
 {
     color: #757575;
@@ -109,6 +88,12 @@ body
     margin-left: 1rem;
     border-bottom: 1px #E5E5E5 solid;
     height: 3rem;
+}
+
+.bk-sidebar .sidebar-item-selected
+{
+    background-color: #F5F5F5;
+
 }
 
 .bk-sidebar .sidebar-item:hover
@@ -198,23 +183,15 @@ body
         flex: 0 0 calc(100% - 30px);
     }
 }
-@media (min-width: 576px) {
-    .card-deck .card {
-        flex: 0 0 calc(50% - 30px);
-    }
-}
+
 @media (min-width: 768px) {
     .card-deck .card {
         flex: 0 0 calc(33.3333333333% - 30px);
     }
 }
-@media (min-width: 992px) {
-    .card-deck .card {
-        flex: 0 0 calc(25% - 30px);
-    }
-}
+
 @media (min-width: 1200px) {
     .card-deck .card {
-        flex: 0 0 calc(20% - 30px);
+        flex: 0 0 calc(25% - 30px);
     }
 }
