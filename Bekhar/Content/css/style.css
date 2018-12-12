@@ -1,18 +1,18 @@
+*{
+    padding: 0;
+    margin:0;
+}
+
 @font-face
 {
     font-family: "B Yekan";
     src: url("../font/BYekan.ttf");
 }
 
-html
-{
-    height: 100%;
-}
-body
-{
-    padding-top: 3.5rem;
-    height: 100%;
 
+body {
+    padding-top: 5rem;
+    position: relative;
 }
 
 .yekan
@@ -38,6 +38,10 @@ body
     align-items: stretch;
 }
 
+.card-title
+{
+    text-align: center;
+}
 
 
 
@@ -47,16 +51,16 @@ body
 /********** Sidebar ***********/
 @media (min-width: 0)
 {
-    .bk-sidebar
-    {
+    .bk-sidebar {
         min-width: 250px;
         max-width: 250px;
         background: #FFFFFF;
         height: 100%;
         padding-top: 1rem;
         border-left: 1px #BDBDBD solid;
-        box-shadow: 0.3rem 0 0.8rem;
+        border-bottom: 1px #BDBDBD solid;
         margin-right: -250px;
+        margin-bottom: 2rem;
     }
 
 }
@@ -64,16 +68,16 @@ body
 
 @media (min-width: 576px)
 {
-    .bk-sidebar
-    {
+    .bk-sidebar {
         min-width: 250px;
         max-width: 250px;
         background: #FFFFFF;
         height: 100%;
         padding-top: 1rem;
         border-left: 1px #BDBDBD solid;
-        box-shadow: 0.3rem 0 0.8rem;
+        border-bottom: 1px #BDBDBD solid;
         margin-right: 0;
+        margin-bottom: 2rem;
     }
 }
 .bk-sidebar-header

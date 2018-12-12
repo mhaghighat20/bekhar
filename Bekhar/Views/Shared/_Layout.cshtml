@@ -1,44 +1,66 @@
 ﻿<!DOCTYPE html>
-<html>
-<head>
+<html dir="rtl">
+    <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>غوره :: @Page.Title</title>
+    
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css" integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+    @{var style = "~/Content/css/mdb.min.css";}
+    <link rel="stylesheet" type="text/css" href="@Href(style)" />
+    @{style = "~/Content/css/style.css";}
+    <link rel="stylesheet" type="text/css" href="@Href(style)" />
+
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+<body class="yekan" style="height:100%; margin-bottom:0px;">
+    <header>
+        <nav class="navbar fixed-top deep-orange lighten-1">
+            <a class="navbar-brand white-text" href="#">
+                <i class="fas fa-frog" style="font-size: 2rem;">
+                    <span class="brand" style="margin-right: 1rem; vertical-align: top;">غوره</span>
+                </i>
+            </a>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="mdi mdi-menu-open"></i>
+            </button>
+
+            <ul class="nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link bk-nav-link" href="#">درباره ما </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bk-nav-link" href="#">تماس با ما</a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-white white-text yekan px-3">
+                <span style="vertical-align: top; font-weight: bold; font-size: 1rem;"> آگهی جدید </span>
+                <i class="fa fa-plus" style="font-size: 1.5rem; vertical-align: middle;"></i>
+            </button>
+        </nav>
+    </header>
+    
+    @RenderBody()
+
+    <footer class="page-footer font-small deep-orange lighten-2">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3" style="direction:ltr;">
+            © 2018 Copyright:
+            <a href="#"> RishMinds </a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+    @{ var jq = "~/Content/js/jquery-3.3.1.min.js";
+            var md = "~/Content/js/mdb.min.js";
+    }
+    <script type="text/javascript" src="@Href(jq)"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+    <script src="@Href(md)"></script>
 </body>
 </html>

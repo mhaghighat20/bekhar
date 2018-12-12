@@ -15,7 +15,7 @@ namespace Bekhar.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "I'm testing code :))";
 
             return View();
         }

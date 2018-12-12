@@ -1,47 +1,68 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    Page.Title = "صفحه اصلی";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-
-    @{ 
-        var kala = new Bekhar.Models.Kala()
-        {
-            Name = "آپارتمان",
-            Description = "محدوده شریف فول امکانات طبقه چهارم بدون آسانسور با جکوزی",
-            Price = 50_000_000
-        };
-
-        <div class="panel">
-            <h3>@kala.Name</h3>
-            <span>@kala.Description</span>
-            <br />
-            <span>@kala.Price</span>
+<div class="wrapper">
+    <!-- Sidebar Starts here -->
+    <nav class="bk-sidebar pb-3">
+        <div class="bk-sidebar-header">
+            <h5>دسته بندی کالاها</h5>
         </div>
-    }
+
+        <ul class="list-group components">
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> خونه </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+            <li class="list-group-item sidebar-item">
+                <span class="sidebar-item-text"> ماشین </span>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid pt-4 px-4 yekan">
+        <div class="card-deck">
+            <div class="card">
+                <div class="view overlay z-depth-1-half">
+                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" class="card-img-top" alt="">
+                    <div class="mask rgba-white-light"></div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">لپ تاپ ایسر</h4>
+                    <!-- Text -->
+                    <p class="card-text">این لپ تاپو تازه خریدم مدل aspire e1 هست و میخواستم که به سرعت  . . .</p>
+                    <button class="btn btn-outline-deep-orange">خرید</button>
+                </div>
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+            <div class="card">
+            </div>
+        </div>
+    </div>
 </div>
