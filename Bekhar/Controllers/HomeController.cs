@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Bekhar.Elastic;
 using Bekhar.Models;
 
 namespace Bekhar.Controllers
@@ -11,13 +12,13 @@ namespace Bekhar.Controllers
     {
         public ActionResult Index()
         {
-            List<Kala> kalas = new List<Kala>();
-            foreach (Kala kala in GetSampleKalaData())
-                kalas.Add(kala);
+            //List<Kala> kalas = new List<Kala>();
+            //foreach (Kala kala in GetSampleKalaData())
+            //    kalas.Add(kala);
 
-            // TODO: Get actual kalas
+            var kalaList = ElasticEngine.GetAllKala();
 
-            return View(kalas);
+            return View(kalaList);
         }
 
         // Sample Data
