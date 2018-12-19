@@ -56,10 +56,10 @@ namespace Bekhar.Controllers
                 //var newProject = project;
                 kala.CreationTime = DateTime.Now;
                 ElasticEngine.AddKala(kala);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
 
         }
 
