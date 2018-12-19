@@ -21,6 +21,14 @@ namespace Bekhar.Controllers
             return View(kalaList);
         }
 
+        [HttpPost]
+        public ActionResult Index(string keyword)
+        {
+            var kalaList = ElasticEngine.GetKalaByKeyword(keyword);
+
+            return View(kalaList);
+        }
+
         // Sample Data
         private Kala[] GetSampleKalaData()
         {

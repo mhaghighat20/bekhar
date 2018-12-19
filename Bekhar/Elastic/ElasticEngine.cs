@@ -21,8 +21,28 @@ namespace Bekhar.Elastic
             ValidateResponse(response);
 
             var result = response.Documents.ToList();
+            return AssignIds(response, result);
+        }
+
+        internal static List<Kala> GetKalaByKeyword(string keyword)
+        {
+            var response = EsClient.GetInstance().Search<Kala>(s =>
+                s.Query(
+                    q => q.MultiMatch(
+                        m => m.Query(keyword).Fields(
+                new List<string>() { "description", "name" }.ToArray()
+                ))));
+
+            ValidateResponse(response);
+
+            var result = response.Documents.ToList();
+            return AssignIds(response, result);
+        }
+
+        private static List<Kala> AssignIds(ISearchResponse<Kala> response, List<Kala> result)
+        {
             int counter = 0;
-            foreach(var id in response.Hits.Select(x => x.Id))
+            foreach (var id in response.Hits.Select(x => x.Id))
             {
                 result[counter++].Id = id;
             }
