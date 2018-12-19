@@ -44,8 +44,19 @@
     </nav>
 
     <div class="container-fluid pt-4 px-4 yekan">
+        <form method="post" action="~/Home/Index" id="search-form">
+            <div class="row jumbotron mx-2" style="height:150px">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="عنوان کالای مورد نظر را وارد کنید" aria-label="Recipient's username" aria-describedby="basic-addon2" name="keyword" />
+                    <div class="input-group-append">
+                        <button class="input-group-text deep-orange white-text px-4" id="basic-addon2" onclick="document.getElementById('search-form').submit();"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="card-deck">
-            @foreach (var kala in Model){
+            @foreach (var kala in Model)
+            {
                 <div class="card my-3">
                     <div class="view">
                         <img src="https://via.placeholder.com/250" class="card-img-top" alt="" style="height:250px;">
@@ -59,7 +70,7 @@
                         <a class="btn btn-deep-orange font-weight-bold" href="~/Kala/Details/@kala.Id">خرید</a>
                     </div>
                 </div>
-            }       
+                }       
         </div>
     </div>
 </div>
