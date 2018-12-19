@@ -20,7 +20,14 @@ namespace Bekhar.Elastic
             var response = EsClient.GetInstance().Search<Kala>();
             ValidateResponse(response);
 
-            return response.Documents.ToList();
+            var result = response.Documents.ToList();
+            int counter = 0;
+            foreach(var id in response.Hits.Select(x => x.Id))
+            {
+                result[counter++].Id = id;
+            }
+
+            return result;
         }
 
         internal static Kala GetKalaById(string id)
