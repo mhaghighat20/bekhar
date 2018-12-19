@@ -1,8 +1,3 @@
-*{
-    padding: 0;
-    margin:0;
-}
-
 @font-face
 {
     font-family: "B Yekan";
@@ -11,9 +6,17 @@
 
 
 body {
+    min-height:700px !important;
     padding-top: 5rem;
-    position: relative;
+    margin:0;
 }
+
+html {
+    min-height: 100%;
+    padding: 0;
+    direction: rtl;
+}
+
 
 .yekan
 {

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html dir="rtl">
+<html>
     <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +14,11 @@
 
 
 </head>
-<body class="yekan" style="height:100%; margin-bottom:0px;">
+<body class="yekan">
+    
     <header>
         <nav class="navbar fixed-top deep-orange lighten-1">
-            <a class="navbar-brand white-text" href="#">
+            <a class="navbar-brand white-text yekan" href="#">
                 <i class="fas fa-frog" style="font-size: 2rem;">
                     <span class="brand" style="margin-right: 1rem; vertical-align: top;">غوره</span>
                 </i>
@@ -41,26 +42,25 @@
             </button>
         </nav>
     </header>
+        @RenderBody()
     
-    @RenderBody()
+        <footer class="page-footer font-small blue-grey darken-2">
 
-    <footer class="page-footer font-small deep-orange lighten-2">
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3" style="direction:ltr;">
+                © 2018 Copyright:
+                <a href="#"> RishMinds </a>
+            </div>
+            <!-- Copyright -->
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3" style="direction:ltr;">
-            © 2018 Copyright:
-            <a href="#"> RishMinds </a>
-        </div>
-        <!-- Copyright -->
+        </footer>
 
-    </footer>
-
-    @{ var jq = "~/Content/js/jquery-3.3.1.min.js";
+        @{ var jq = "~/Content/js/jquery-3.3.1.min.js";
             var md = "~/Content/js/mdb.min.js";
-    }
-    <script type="text/javascript" src="@Href(jq)"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
-    <script src="@Href(md)"></script>
+        }
+        <script type="text/javascript" src="@Href(jq)"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+        <script src="@Href(md)"></script>
 </body>
 </html>

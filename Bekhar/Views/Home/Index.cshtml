@@ -45,24 +45,21 @@
 
     <div class="container-fluid pt-4 px-4 yekan">
         <div class="card-deck">
-            <div class="card">
-                <div class="view overlay z-depth-1-half">
-                    <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" class="card-img-top" alt="">
-                    <div class="mask rgba-white-light"></div>
+            @foreach (var kala in Model){
+                <div class="card my-3">
+                    <div class="view">
+                        <img src="https://via.placeholder.com/250" class="card-img-top" alt="" style="height:250px;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">@kala.Name</h4>
+                        <p class="card-text">@kala.Description</p>
+                    </div>
+                    <div class="card-footer p-1 d-flex" style="background:white;">
+                        <div class="mr-auto my-auto pl-3 deep-orange-text">@kala.Price <span class="font-weight-bold">تومان</span></div>
+                        <a class="btn btn-deep-orange font-weight-bold" href="~/Kala/Details/@kala.Id">خرید</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h4 class="card-title">لپ تاپ ایسر</h4>
-                    <!-- Text -->
-                    <p class="card-text">این لپ تاپو تازه خریدم مدل aspire e1 هست و میخواستم که به سرعت  . . .</p>
-                    <button class="btn btn-outline-deep-orange">خرید</button>
-                </div>
-            </div>
-            <div class="card">
-            </div>
-            <div class="card">
-            </div>
-            <div class="card">
-            </div>
+            }       
         </div>
     </div>
 </div>
