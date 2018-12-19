@@ -28,5 +28,7 @@ namespace Bekhar.Models
         public string Email { get; set; }
         public DateTime CreationTime { get; set; }
 
+        public string Location { get; set; }
+
     }
 }

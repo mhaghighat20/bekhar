@@ -20,8 +20,8 @@ namespace Bekhar.Controllers
         // GET: Kala/Details/5
         public ActionResult Details(string id)
         {
-            // Kala item = ElasticEngine.GetKalaById(id);
-            Kala item = GetSampleKala(id);
+            Kala item = ElasticEngine.GetKalaById(id);
+            // Kala item = GetSampleKala(id);
 
             return View(item);
         }
