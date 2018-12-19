@@ -13,6 +13,7 @@ namespace Bekhar.Elastic
         {
             var response = EsClient.GetInstance().IndexDocument<Kala>(kala);
             ValidateResponse(response);
+            EsClient.GetInstance().Refresh("bekhar");
         }
 
         internal static List<Kala> GetAllKala()

@@ -49,17 +49,17 @@ namespace Bekhar.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Mobile,Email")] Kala kala)
         {
 
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 //var UserName = User.Identity.Name;
                 //var userId = _core.FindUserId(UserName, false);
                 //var newProject = project;
                 kala.CreationTime = DateTime.Now;
                 ElasticEngine.AddKala(kala);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", null);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", null);
 
         }
 
