@@ -62,6 +62,9 @@ namespace Bekhar.Elastic
             if (searchParameter.PriceMax.HasValue)
                 result.Add(new LongRangeQuery() { Field = "price", LessThanOrEqualTo = searchParameter.PriceMax });
 
+            if (!string.IsNullOrWhiteSpace(searchParameter.Username))
+                result.Add(new MatchQuery() { Query = searchParameter.Username, Field = "username" });
+
             if (result.Count == 0)
                 return new MatchAllQuery();
             else if (result.Count == 1)

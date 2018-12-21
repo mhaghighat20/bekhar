@@ -8,16 +8,23 @@ using System.Web.Mvc;
 
 namespace Bekhar.Controllers
 {
+    [Authorize]
     public class KalaController : Controller
     {
         // GET: Kala
         public ActionResult Index()
         {
-            List<Kala> items = ElasticEngine.GetAllKala();
+            var searchParam = new SearchParameter()
+            {
+                Username = User.Identity.Name
+            };
+
+            List<Kala> items = ElasticEngine.GetKalaBySearchParam(searchParam);
             return View(items);
         }
 
         // GET: Kala/Details/5
+        [AllowAnonymous]
         public ActionResult Details(string id)
         {
             Kala item = ElasticEngine.GetKalaById(id);
@@ -38,7 +45,6 @@ namespace Bekhar.Controllers
             return kalas[int.Parse(id)];
         }
 
-        [Authorize]
         // GET: Kala/Create
         public ActionResult Create()
         {
@@ -46,7 +52,6 @@ namespace Bekhar.Controllers
         }
 
         // POST: Kala/Create
-        [Authorize]
         [HttpPost]
         public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Mobile,Email,Location,City,Category")] Kala kala)
         {

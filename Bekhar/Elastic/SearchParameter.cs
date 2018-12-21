@@ -13,5 +13,7 @@ namespace Bekhar.Elastic
         public string Location { get; set; }
         public long? PriceMin { get; set; }
         public long? PriceMax { get; set; }
+
+        public string Username { get; set; }
     }
 }
