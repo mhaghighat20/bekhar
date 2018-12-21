@@ -22,9 +22,19 @@ namespace Bekhar.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string keyword)
+        public ActionResult Index(string keyword, string category, string city, string location, long priceMin, long priceMax)
         {
-            var kalaList = ElasticEngine.GetKalaByKeyword(keyword);
+            var searchParam = new SearchParameter()
+            {
+                Keyword = keyword,
+                Category = category,
+                City = city,
+                Location = location,
+                PriceMin = priceMin,
+                PriceMax = priceMax
+            };
+
+            var kalaList = ElasticEngine.GetKalaBySearchParam(searchParam);
 
             return View(kalaList);
         }

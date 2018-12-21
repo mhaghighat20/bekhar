@@ -38,6 +38,7 @@ namespace Bekhar.Controllers
             return kalas[int.Parse(id)];
         }
 
+        [Authorize]
         // GET: Kala/Create
         public ActionResult Create()
         {
@@ -45,13 +46,15 @@ namespace Bekhar.Controllers
         }
 
         // POST: Kala/Create
+        [Authorize]
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Mobile,Email")] Kala kala)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Mobile,Email,Location,City,Category")] Kala kala)
         {
-
+            // TODO ولیدیتور ها اصلاح شوند
             //if (ModelState.IsValid)
             {
-                //var UserName = User.Identity.Name;
+                //var Username = User.Identity.Name;
+                kala.Username = User.Identity.Name;
                 //var userId = _core.FindUserId(UserName, false);
                 //var newProject = project;
                 kala.CreationTime = DateTime.Now;

@@ -27,8 +27,14 @@ namespace Bekhar.Models
         [EmailAddress(ErrorMessage = "ایمیل نامعتبر")]
         public string Email { get; set; }
         public DateTime CreationTime { get; set; }
+        public string Category { get; set; }
 
+        // شهر
+        public string City { get; set; }
+
+        // محله
         public string Location { get; set; }
 
+        public string Username { get; set; }
     }
 }

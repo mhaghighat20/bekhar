@@ -25,19 +25,49 @@ namespace Bekhar.Elastic
             return AssignIds(response, result);
         }
 
-        internal static List<Kala> GetKalaByKeyword(string keyword)
+        internal static List<Kala> GetKalaBySearchParam(SearchParameter searchParameter)
         {
+            QueryContainer query = GetQuery(searchParameter);
             var response = EsClient.GetInstance().Search<Kala>(s =>
                 s.Query(
-                    q => q.MultiMatch(
-                        m => m.Query(keyword).Fields(
-                new List<string>() { "description", "name" }.ToArray()
-                ))));
+                    q => query
+                ));
+            // TODO سورت بر اساس زمان به صورت نزولی اضافه شود
 
             ValidateResponse(response);
 
             var result = response.Documents.ToList();
             return AssignIds(response, result);
+        }
+
+        private static QueryContainer GetQuery(SearchParameter searchParameter)
+        {
+            var result = new List<QueryContainer>();
+
+            if (!string.IsNullOrWhiteSpace(searchParameter.Keyword))
+                result.Add(new MultiMatchQuery() { Query = searchParameter.Keyword, Fields = new[] { "description", "name" } });
+
+            if (!string.IsNullOrWhiteSpace(searchParameter.Category))
+                result.Add(new MatchQuery() { Query = searchParameter.Category, Field = "category" });
+
+            if (!string.IsNullOrWhiteSpace(searchParameter.City))
+                result.Add(new MatchQuery() { Query = searchParameter.City, Field = "city" });
+
+            if (!string.IsNullOrWhiteSpace(searchParameter.Location))
+                result.Add(new MatchQuery() { Query = searchParameter.Location, Field = "location" });
+
+            if (searchParameter.PriceMin.HasValue)
+                result.Add(new LongRangeQuery() { Field = "price", GreaterThanOrEqualTo = searchParameter.PriceMin, Relation = RangeRelation.Within });
+
+            if (searchParameter.PriceMax.HasValue)
+                result.Add(new LongRangeQuery() { Field = "price", LessThanOrEqualTo = searchParameter.PriceMax });
+
+            if (result.Count == 0)
+                return new MatchAllQuery();
+            else if (result.Count == 1)
+                return result.First();
+            else
+                return new BoolQuery() { Must = result };
         }
 
         private static List<Kala> AssignIds(ISearchResponse<Kala> response, List<Kala> result)

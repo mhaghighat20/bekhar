@@ -201,6 +201,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Elastic\ElasticEngine.cs" />
     <Compile Include="Elastic\EsClient.cs" />
+    <Compile Include="Elastic\SearchParameter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
