@@ -25,6 +25,25 @@ namespace Bekhar.Elastic
             return AssignIds(response, result);
         }
 
+        internal static void DeleteKala(string id)
+        {
+            var query = new IdsQuery()
+            {
+                Values = new List<Id>()
+                {
+                    id
+                }
+            };
+
+            var response = EsClient.GetInstance().DeleteByQuery<Kala>(d =>
+                d.Query(
+                    q => query
+                ));
+
+            ValidateResponse(response);
+            EsClient.GetInstance().Refresh("bekhar");
+        }
+
         internal static List<Kala> GetKalaBySearchParam(SearchParameter searchParameter)
         {
             QueryContainer query = GetQuery(searchParameter);
@@ -40,7 +59,7 @@ namespace Bekhar.Elastic
             return AssignIds(response, result);
         }
 
-        private static QueryContainer GetQuery(SearchParameter searchParameter)
+        public static QueryContainer GetQuery(SearchParameter searchParameter)
         {
             var result = new List<QueryContainer>();
 
@@ -72,6 +91,8 @@ namespace Bekhar.Elastic
             else
                 return new BoolQuery() { Must = result };
         }
+
+
 
         private static List<Kala> AssignIds(ISearchResponse<Kala> response, List<Kala> result)
         {

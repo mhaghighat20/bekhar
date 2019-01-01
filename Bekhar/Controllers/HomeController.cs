@@ -39,18 +39,6 @@ namespace Bekhar.Controllers
             return View(kalaList);
         }
 
-        // Sample Data
-        private Kala[] GetSampleKalaData()
-        {
-            Kala[] kalas = new Kala[5];
-            kalas[0] = new Kala() { Id = "0", Name = "جارو برقی در حد", CreationTime = DateTime.Now, Description = "خیلی خوبه!", Mobile = "091221211", Price = 5000 };
-            kalas[1] = new Kala() { Id = "1", Name = "جارو برقی عادی", CreationTime = DateTime.Now, Description = "بد نیست ولی خارجیه!", Mobile = "091221211", Price = 43000 };
-            kalas[2] = new Kala() { Id = "2", Name = "جارو برقی بد", CreationTime = DateTime.Now, Description = "خیلی خوبه فقط جارو نمیکنه", Mobile = "091221211", Price = 500 };
-            kalas[3] = new Kala() { Id = "3", Name = "جارو دستی خوب", CreationTime = DateTime.Now, Description = "از همشون بهتره. فقط یذره ریش ریش شده و بو میده", Mobile = "091221211", Price = 50 };
-            kalas[4] = new Kala() { Id = "4", Name = "جارو", CreationTime = DateTime.Now, Description = "انتظار داری چی باشه؟", Mobile = "091221211", Price = 5 };
-            return kalas;
-        }
-
         public ActionResult About()
         {
             ViewBag.Message = "I'm testing code :))";
