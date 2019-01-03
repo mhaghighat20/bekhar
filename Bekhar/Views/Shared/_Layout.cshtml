@@ -14,7 +14,10 @@
     <link rel="stylesheet" type="text/css" href="@Href(style)" />
     @{style = "~/Content/css/style.css";}
     <link rel="stylesheet" type="text/css" href="@Href(style)" />
-
+    @if(Page.CustomCSS != null)
+    {
+        <link rel="stylesheet" type="text/css" href="@Href(Page.CustomCSS)" />
+    }
 
 </head>
 <body class="yekan">
@@ -46,18 +49,18 @@
         </nav>
     </header>
     @RenderBody()
-
+    <!--
     <footer class="page-footer font-small blue-grey darken-2">
 
-        <!-- Copyright -->
+        <!-- Copyright >
         <div class="footer-copyright text-center py-3" style="direction:ltr;">
             © 2018 Copyright:
             <a href="#"> RishMinds </a>
         </div>
-        <!-- Copyright -->
+        <!-- Copyright >
 
     </footer>
-
+    -->
     @{ var jq = "~/Content/js/jquery-3.3.1.min.js";
         var md = "~/Content/js/mdb.min.js";
     }
