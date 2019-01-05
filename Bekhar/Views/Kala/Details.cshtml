@@ -10,15 +10,14 @@
             <h2>@Model.Name</h2>
             <p>@Model.CreationTime</p>
         
-            <div class="col" style="padding: 10px">
-                <button type="button" class="btn deep-orange white-text">@Model.Mobile</button>
-            </div>
-        
             <table class="table">
+                
+                
                 <tr>
                     <th>دسته بندی</th>
                     <th> @Model.Category </th>
                 </tr>
+                
                 <tr>
                     <td>محل</td>
                     <td>@Model.City - @Model.Location</td>
@@ -31,6 +30,11 @@
                     <td>قیمت</td>
                     <td>@Model.Price <span class="font-weight-bold">تومان</span></td>
                 </tr>
+                <tr>
+                    <td>موبایل</td>
+                    <td> @Model.Mobile </td>
+                </tr>
+
             </table>
             <p>
                 @Model.Description
