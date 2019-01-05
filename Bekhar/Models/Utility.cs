@@ -49,6 +49,11 @@ namespace Bekhar.Models
             //if (dt == null)
             //    return null;
 
+            return GetPersianStrFromDT(dt);
+        }
+
+        public static string GetPersianStrFromDT(DateTime dt)
+        {
             var pc = new PersianCalendar();
             var v = dt;
             return $"{pc.GetYear(v)}-{pc.GetMonth(v)}-{pc.GetDayOfMonth(v)} {v.Hour}:{v.ToString("mm")}";

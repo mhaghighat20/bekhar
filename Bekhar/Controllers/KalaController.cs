@@ -79,9 +79,14 @@ namespace Bekhar.Controllers
         }
 
         // GET: Kala/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            Kala item = ElasticEngine.GetKalaById(id);
+
+            if (int.TryParse(item.Category, out var catId))
+                item.Category = Utility.GetCategoryById(catId).Name;
+
+            return View(item);
         }
 
         // POST: Kala/Delete/5
@@ -92,7 +97,7 @@ namespace Bekhar.Controllers
             {
                 Kala item = ElasticEngine.GetKalaById(id);
                 if (item.Username == User.Identity.Name)
-                    ElasticEngine.DeleteKala(item.Id);
+                    ElasticEngine.DeleteKala(id);
                 else
                     throw new InvalidOperationException("Access is deneied");
 

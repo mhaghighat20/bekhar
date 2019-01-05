@@ -26,13 +26,15 @@ namespace Bekhar.Models
         [Required(ErrorMessage = "وارد کردن ایمیل ضروری است.")]
         [EmailAddress(ErrorMessage = "ایمیل نامعتبر")]
         public string Email { get; set; }
+
+        [Display(Name = "تاریخ ایجاد")]
         public DateTime CreationTime { get; set; }
         public string Category { get; set; }
 
-        // شهر
+        [Display(Name = "شهر")]
         public string City { get; set; }
 
-        // محله
+        [Display(Name = "محله")]
         public string Location { get; set; }
 
         public string Username { get; set; }

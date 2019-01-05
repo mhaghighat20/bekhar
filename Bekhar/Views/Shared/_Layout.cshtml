@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="@Href(style)" />
     @{style = "~/Content/css/style.css";}
     <link rel="stylesheet" type="text/css" href="@Href(style)" />
-    @if(Page.CustomCSS != null)
+    @if (Page.CustomCSS != null)
     {
         <link rel="stylesheet" type="text/css" href="@Href(Page.CustomCSS)" />
     }
@@ -40,7 +40,7 @@
                 </li>
             </ul>
 
-            
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="mdi mdi-menu-open"></i>
             </button>
@@ -58,7 +58,9 @@
             {
                 <span class="white-text ml-auto">
                     <i class="fa fa-user" style="font-size:1.2rem; "></i>
-                    @User.Identity.GetUserName()
+                    <a href="/Kala">
+                        @User.Identity.GetUserName()
+                    </a>
                 </span>
 
                 <a class="btn btn-outline-white white-text yekan px-3 ml-3" href="~/Kala/Create">
