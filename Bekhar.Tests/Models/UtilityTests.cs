@@ -14,7 +14,9 @@ namespace Bekhar.Models.Tests
         [TestMethod()]
         public void GetAllCitiesTest()
         {
-            Assert.Fail();
+            var cities = Utility.GetAllCities();
+            Assert.AreEqual("تهران", cities.First());
+            Assert.AreEqual("همدان", cities.Last());
         }
     }
 }
