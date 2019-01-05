@@ -1,4 +1,5 @@
-﻿@model Bekhar.Models.Kala
+﻿@using Bekhar.Models
+@model Bekhar.Models.Kala
 
 @{
     Page.Title = "نمایش کالا";
@@ -8,14 +9,14 @@
     <div class="row ">
         <div class="col-6">
             <h2>@Model.Name</h2>
-            <p>@Model.CreationTime</p>
+            <p>@Model.CreationTime.GetPersianStr()</p>
         
             <table class="table">
                 
                 
                 <tr>
                     <th>دسته بندی</th>
-                    <th> @Model.Category </th>
+                    <th> @Model.Category</th>
                 </tr>
                 
                 <tr>

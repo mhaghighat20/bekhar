@@ -32,9 +32,6 @@ namespace Bekhar.Controllers
             if (int.TryParse(item.Category, out var catId))
                 item.Category = Utility.GetCategoryById(catId).Name;
 
-            var pc = new System.Globalization.PersianCalendar();
-            //pc.Get
-            // TODO پر کردن دسته و موبایل
             return View(item);
         }
 

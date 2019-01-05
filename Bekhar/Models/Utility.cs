@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
 namespace Bekhar.Models
 {
-    public class Utility
+    public static class Utility
     {
         public static List<string> GetAllCities()
         {
@@ -41,6 +42,16 @@ namespace Bekhar.Models
         public static List<Category> GetCategoryByParentId(int parentId)
         {
             return Category.GetAllCategories().Where(x => x.ParentId == parentId).ToList();
+        }
+
+        public static string GetPersianStr(this DateTime dt)
+        {
+            //if (dt == null)
+            //    return null;
+
+            var pc = new PersianCalendar();
+            var v = dt;
+            return $"{pc.GetYear(v)}-{pc.GetMonth(v)}-{pc.GetDayOfMonth(v)} {v.Hour}:{v.ToString("mm")}";
         }
     }
 }
