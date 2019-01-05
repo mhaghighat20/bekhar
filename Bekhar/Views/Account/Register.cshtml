@@ -1,8 +1,87 @@
 ﻿@model Bekhar.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    Page.Title = "ثبت نام";
+    Page.CustomCSS = "~/Content/css/register.css";
 }
 
+
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container deep-orange lighten-5">
+                    <img class="brand_logo" src="@Href("~/Content/image/logo.png")" />
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center form_container">
+
+                @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                    {*@
+                <form action="Register" method="post" id="lform">
+                    @Html.AntiForgeryToken()
+                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger login-failed" })*@
+
+
+                    <div class="input-group mb-3">
+                        <input class="form-control input_user flex-grow-0" data-val-required="* باید این قسمت را وارد کنید." id="Name" name="Name" placeholder="نام" type="text" value="">
+
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <break style="flex-basis:100%; width:200px; height:0; overflow:hidden;"></break>
+                        <span class="field-validation-valid text-danger" style="font-size:0.9rem" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input class="form-control input_user flex-grow-0" data-val="true" data-val-email="* ایمیل را به درستی وارد کنید." data-val-required="* باید این قسمت را وارد کنید." id="Email" name="Email" placeholder="ایمیل" type="text" value="">
+
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <break style="flex-basis:100%; width:200px; height:0; overflow:hidden;"></break>
+                        <span class="field-validation-valid text-danger" style="font-size:0.9rem" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input class="form-control input_pass" data-val="true" data-val-required="* باید این قسمت را وارد کنید." id="Password" name="Password" type="password" placeholder="رمز عبور">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+
+                        <break style="flex-basis:100%; width:200px; height:0; overflow:hidden;"></break>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <div class="input-group my-3">
+                        <input class="form-control input_pass" data-val="true" data-val-required="* باید این قسمت را وارد کنید." id="ConfirmPassword" name="ConfirmPassword" type="password" placeholder="تکرار رمز عبور">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+
+                        <break style="flex-basis:100%; width:200px; height:0; overflow:hidden;"></break>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline" name="RememberMe">
+                            <label class="custom-control-label" for="customControlInline"></label><a class="links" href="#">قوانین</a> سایت را مطالعه کرده و میپذیرم.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-center login_container">
+                <button type="button" name="button" class="btn login_btn deep-orange" onclick="document.getElementById('lform').submit();">ثبت نام</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
 <h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -35,7 +114,7 @@
         </div>
     </div>
 }
-
+-->
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

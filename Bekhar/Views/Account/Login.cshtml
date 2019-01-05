@@ -1,62 +1,77 @@
 ﻿@using Bekhar.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    Page.Title = "ورود";
+    Page.CustomCSS = "~/Content/css/login.css";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
+
+
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container deep-orange lighten-5">
+                    <img class="brand_logo" src="@Href("~/Content/image/logo.png")" />
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+            </div>
+            
+                <div class="d-flex justify-content-center form_container">
+                    
+                    @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                    {*@
+                    <form action="Login" method="post" id="lform">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger login-failed" })
+
+                        <div class="input-group mb-3">
+                            <input class="form-control input_user flex-grow-0" data-val="true" data-val-email="* ایمیل را به درستی وارد کنید." data-val-required="* باید این قسمت را وارد کنید." id="Email" name="Email" placeholder="نام کاربری" type="text" value="">
+
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <break style="flex-basis:100%; width:200px; height:0; overflow:hidden;"></break>
+                            <span class="field-validation-valid text-danger" style="font-size:0.9rem" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+
                         </div>
-                    </div>
+
+                        <div class="input-group mb-2">
+                            <input class="form-control input_pass" data-val="true" data-val-required="* باید این قسمت را وارد کنید." id="Password" name="Password" type="password" placeholder="رمز عبور">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+
+                            <break style="flex-basis:100%; width:200px; height:0; overflow:hidden;"></break>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControlInline" name="RememberMe">
+                                <label class="custom-control-label" for="customControlInline">مرا به خاطر بسپار</label>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
+                <div class="d-flex justify-content-center mt-3 login_container">
+                    <button type = "button" name="button" class="btn login_btn deep-orange" onclick="document.getElementById('lform').submit();">ورود</button>
                 </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+             
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    حساب کاربری ندارید؟  <a href = "Register" class="ml-3">ثبت نام</a>
+                </div>
+                <div class="d-flex justify-content-center links">
+                    <a href = "ForgotPassword">رمز خود را فراموش کردید؟</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!--
+@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+-->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
