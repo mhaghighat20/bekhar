@@ -18,5 +18,20 @@ namespace Bekhar.Models.Tests
             Assert.AreEqual("تهران", cities.First());
             Assert.AreEqual("همدان", cities.Last());
         }
+
+        [TestMethod]
+        public void GetAllCategoriesTest()
+        {
+            var cats = Utility.GetAllCategories();
+            Assert.IsFalse(cats.Any(x => x.ParentId != null));
+        }
+
+        [TestMethod]
+        public void GetParentCategoriesTest()
+        {
+            var cats = Utility.GetCategoryByParentId(0);
+            Assert.IsTrue(cats.All(x => x.ParentId != null));
+            Assert.IsFalse(cats.Any(x => x.ParentId == null));
+        }
     }
 }
