@@ -11,7 +11,7 @@ namespace Bekhar.Models
         public string Name { get; set; }
 
 
-        public List<Category> GetAllCategories()
+        public static List<Category> GetAllCategories()
         {
             var strList = new List<string>()
             {

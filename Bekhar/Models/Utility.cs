@@ -7,7 +7,7 @@ namespace Bekhar.Models
 {
     public class Utility
     {
-        public List<string> GetAllCities()
+        public static List<string> GetAllCities()
         {
             return new List<string>()
             {
@@ -26,6 +26,11 @@ namespace Bekhar.Models
                 "کرمان",
                 "همدان",
             };
+        }
+
+        public static List<Category> GetAllCategories()
+        {
+            return Category.GetAllCategories();
         }
     }
 }
