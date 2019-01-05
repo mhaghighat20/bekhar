@@ -15,12 +15,22 @@
                 var categories = Bekhar.Models.Utility.GetAllCategories();
             }
             @foreach(Bekhar.Models.Category category in categories)
-            { 
+            {
                 <li class="list-group-item sidebar-item">
-                    <a href="/?cat=@category.Id">
-                        <span class="sidebar-item-text"> @category.Name </span>
-                    </a>
+                    @if (@Request.QueryString["cat"] == @category.Id.ToString())
+                    {
+                        <a href="/?cat=@category.Id" selected="true">
+                            <span class="sidebar-item-text"> @category.Name </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/?cat=@category.Id">
+                            <span class="sidebar-item-text"> @category.Name </span>
+                        </a>
+                    }
                 </li>
+                
             }
             <!--
             <li class="list-group-item sidebar-item">
@@ -56,13 +66,51 @@
 
     <div class="container-fluid pt-4 px-4 yekan">
         <form method="post" action="~/Home/Index" id="search-form">
-            <div class="row jumbotron mx-2" style="height:150px">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="عنوان کالای مورد نظر را وارد کنید" aria-label="Recipient's username" aria-describedby="basic-addon2" name="keyword" />
-                    <div class="input-group-append">
-                        <button class="input-group-text deep-orange white-text px-4" id="basic-addon2" onclick="document.getElementById('search-form').submit();"><i class="fa fa-search"></i></button>
+            <div class="jumbotron mx-2" style="">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="عنوان کالای مورد نظر را وارد کنید" name="keyword" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">قیمت از</span>
+                            </div>
+                            <input type="text" class="form-control" name="PriceMin" />
+                            <div class="input-group-postpond">
+                                <span class="input-group-text">تا</span>
+                            </div>
+                            <input type="text" class="form-control" name="PriceMax" />
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <select class="browser-default custom-select" id="city" name="City">
+                                <option value="" selected disabled>شهر خود را انتخاب کنید</option>
+                                @{
+                                    var cities = Bekhar.Models.Utility.GetAllCities();
+                                }
+                                @foreach (var city in cities)
+                                {
+                                    <option value="@city">@city</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" id="zone" name="Location" class="form-control" placeholder="نام محله خود را وارد کنید" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button class="input-group-text deep-orange white-text px-4" onclick="document.getElementById('search-form').submit();" style="display:block;"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+
             </div>
         </form>
         <div class="card-deck">

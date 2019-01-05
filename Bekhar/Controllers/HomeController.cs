@@ -28,7 +28,7 @@ namespace Bekhar.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string keyword, string location, long priceMin, long priceMax)
+        public ActionResult Index(string keyword, string location, long? priceMin, long? priceMax)
         {
             var searchParameter = new SearchParameter()
             {
