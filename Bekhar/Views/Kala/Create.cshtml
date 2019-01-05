@@ -11,39 +11,8 @@
         <h3 class="text-center py-3 my-1 grey-text">
             ثبت آگهی جدید
         </h3>
-        
-        <!--
-        <div class="jumbotron">
-            <p>
-                
-            </p>
-        </div>
-        -->
 
-        <div class="jumbotron">
-            <!--
-                
-            <div class="row">
-                <div class="col form-group">
-                    <label for="city">شهر</label>
-                    <select class="form-control" id="city">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-                <div class="col form-group">
-                    <label for="position">محدوده آگهی</label>
-                    <select class="form-control" id="position">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-            -->
+        <div class="jumbotron">      
             <!--
             <div>
                 تصاویر
@@ -58,23 +27,7 @@
             <!--
             </div> -->
 
-            <!--
-            <div style="padding-bottom: 50px;padding-top:50px">
-                سازنده
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonProducer"
-                            data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Dropdown button
-                    </button>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonProducer">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
-            -->
+            
                         <!--
 
             <div style="direction: rtl">
@@ -91,10 +44,31 @@
                 </div>
             </div>
             -->
-            <div>
-                <div class="form-group">
-                    <label for="adTitle">عنوان آگهی</label>
-                    <input type="text" class="form-control" name="Name">
+            
+            <div class="row">
+                <div class="col-9">
+                    <div class="form-group">
+                        <label for="adTitle">عنوان آگهی</label>
+                        <input type="text" class="form-control" name="Name">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <label for="category">دسته بندی</label>
+                    <div class="input-group">
+                        <select class="browser-default custom-select" id="category">
+                            <option value="" selected disabled>دسته بندی کالا را انتخاب کنید</option>
+                            @{
+                                var dd = new int[5];
+                                dd[0] = 45;
+                                dd[1] = 33;
+                                dd[4] = 43;
+                            }
+                            @foreach (var i in dd)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -105,18 +79,48 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="city">شهر</label>
+                    <div class="input-group">
+                        <select class="browser-default custom-select" id="city">
+                            <option value="" selected disabled>شهر خود را انتخاب کنید</option>
+                            @{
+                                var ff = new int[10];
+                                ff[0] = 45;
+                                ff[1] = 33;
+                                ff[4] = 43;
+                            }
+                            @foreach (var i in ff)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="zone">محله</label>
+                    <div class="input-group">
+                        <input type="text" id="zone" class="form-control" placeholder="نام محله خود را وارد کنید" />
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="zone">شماره موبایل</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Mobile" placeholder="000000000" style="direction:ltr;">
+                        <div class="input-group-append">
+                            <span class="input-group-text">09</span>
+                        </div>
 
-            <div>
-                <div class="form-group">
-                    <label for="price">قیمت</label>
-                    <input type="text" class="form-control" name="Price">
+                    </div>
                 </div>
             </div>
-            
             <div>
-                <div class="form-group">
-                    <label for="phoneNumber">شماره موبایل</label>
-                    <input type="text" class="form-control" name="Mobile">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="Price" placeholder="قیمت" />
+                    <div class="input-group-append">
+                        <span class="input-group-text">تومان</span>
+                    </div>
                 </div>
             </div>
             
