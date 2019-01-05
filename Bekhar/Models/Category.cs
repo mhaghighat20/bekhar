@@ -10,6 +10,13 @@ namespace Bekhar.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public int? ParentId { get; set; } = null;
+
+        public Category(int? ParentId, int Id)
+        {
+            this.ParentId = ParentId;
+            this.Id = Id;
+        }
 
         public static List<Category> GetAllCategories()
         {
@@ -34,8 +41,18 @@ namespace Bekhar.Models
 
             foreach(var str in strList)
             {
-                result.Add(new Category() { Id = counter++, Name = str });
+                result.Add(new Category(null, counter++) { Name = str });
             }
+
+            var childItems = new List<Category>()
+            {
+                new Category(0, counter++) { Name = "گوشی موبایل" },
+                new Category(0, counter++) { Name = "لوازم جانبی موبایل" },
+                new Category(0, counter++) { Name = "ساعت هوشمند" },
+                new Category(0, counter++) { Name = "تبلت" },
+            };
+
+            result.AddRange(childItems);
 
             return result;
         }

@@ -30,7 +30,12 @@ namespace Bekhar.Models
 
         public static List<Category> GetAllCategories()
         {
-            return Category.GetAllCategories();
+            return Category.GetAllCategories().Where(x => x.ParentId == null).ToList();
+        }
+
+        public static List<Category> GetCategoryByParentId(int parentId)
+        {
+            return Category.GetAllCategories().Where(x => x.ParentId == parentId).ToList();
         }
     }
 }
