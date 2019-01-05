@@ -11,17 +11,17 @@
             <p>@Model.CreationTime</p>
         
             <div class="col" style="padding: 10px">
-                <button type="button" class="btn deep-orange white-text">دریافت اطلاعات تماس</button>
+                <button type="button" class="btn deep-orange white-text">@Model.Mobile</button>
             </div>
         
             <table class="table">
                 <tr>
                     <th>دسته بندی</th>
-                    <th class="grey-text"> هنوز دسته بندی راه اندازی نشده است </th>
+                    <th> @Model.Category </th>
                 </tr>
                 <tr>
                     <td>محل</td>
-                    <td class="grey-text">هنوز مکان راه اندازی نشده است</td>
+                    <td>@Model.City - @Model.Location</td>
                 </tr>
                 <tr>
                     <td>نوع آگهی</td>
