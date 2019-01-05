@@ -64,20 +64,20 @@ namespace Bekhar.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "لطفا این فیلد را پر کنید.")]
         [Display(Name = "نام")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "لطفا این فیلد را پر کنید.")]
         [Display(Name = "شماره تلفن")]
         public string PhoneNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "لطفا این فیلد را پر کنید.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="لطفا این فیلد را پر کنید.")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
