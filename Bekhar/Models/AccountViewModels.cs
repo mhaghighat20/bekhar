@@ -64,28 +64,30 @@ namespace Bekhar.Models
 
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "لطفا این فیلد را پر کنید.")]
+        const string requiredError = "لطفا {0} را وارد کنید.";
+
+        [Required(ErrorMessage = requiredError)]
         [Display(Name = "نام")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "لطفا این فیلد را پر کنید.")]
+        [Required(ErrorMessage = requiredError)]
         [Display(Name = "شماره تلفن")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "لطفا این فیلد را پر کنید.")]
+        [Required(ErrorMessage = requiredError)]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "ایمیل")]
         public string Email { get; set; }
 
         [Required(ErrorMessage ="لطفا این فیلد را پر کنید.")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} باید حداقل {2} کاراکتر باشد.", MinimumLength = 3)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "رمز عبور")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "تکرار رمز عبور")]
+        [Compare("Password", ErrorMessage = "رمز عبور و تکرار آن یکسان نیستند.")]
         public string ConfirmPassword { get; set; }
     }
 
