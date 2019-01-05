@@ -11,9 +11,18 @@
         </div>
 
         <ul class="list-group components">
-            <li class="list-group-item sidebar-item">
-                <span class="sidebar-item-text"> خونه </span>
-            </li>
+            @{ 
+                var categories = Bekhar.Models.Utility.GetAllCategories();
+            }
+            @foreach(Bekhar.Models.Category category in categories)
+            { 
+                <li class="list-group-item sidebar-item">
+                    <a href="/?cat=@category.Id">
+                        <span class="sidebar-item-text"> @category.Name </span>
+                    </a>
+                </li>
+            }
+            <!--
             <li class="list-group-item sidebar-item">
                 <span class="sidebar-item-text"> ماشین </span>
             </li>
@@ -41,6 +50,7 @@
             <li class="list-group-item sidebar-item">
                 <span class="sidebar-item-text"> کتاب </span>
             </li>
+                -->
         </ul>
     </nav>
 

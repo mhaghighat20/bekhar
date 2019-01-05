@@ -36,6 +36,13 @@
                     </div>
 
                     <div class="input-group mb-3">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control input_user flex-grow-0", @placeholder = "شماره تلفن" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control input_pass flex-grow-0", @placeholder = "رمز عبور" })
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>

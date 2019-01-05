@@ -95,18 +95,35 @@ html {
     margin-left: 1rem;
     border-bottom: 1px #E5E5E5 solid;
     height: 3rem;
+	padding:0;
 }
 
-.bk-sidebar .sidebar-item-selected
+.bk-sidebar .sidebar-item a
 {
-    background-color: #F5F5F5;
-
+	color:#FF5722;
+	display:block; 
+	height:100%; 
+	text-align:center;
+	padding-top:0.8rem;
 }
 
-.bk-sidebar .sidebar-item:hover
+.bk-sidebar .sidebar-item a:hover
 {
-    background-color: #F5F5F5;
+	background-color: #F5F5F5;
 }
+
+.bk-sidebar .sidebar-item a[selected="true"]
+{
+	background:#FF5722;
+	color: #FFFFFF;
+}
+
+.bk-sidebar .sidebar-item a[selected="true"]:hover
+{
+	cursor: default;
+}
+
+
 
 
 
