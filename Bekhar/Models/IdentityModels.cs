@@ -16,6 +16,8 @@ namespace Bekhar.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string MyName { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
