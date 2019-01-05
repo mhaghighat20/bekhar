@@ -28,8 +28,13 @@ namespace Bekhar.Controllers
         public ActionResult Details(string id)
         {
             Kala item = ElasticEngine.GetKalaById(id);
-            // Kala item = GetSampleKala(id);
 
+            if (int.TryParse(item.Category, out var catId))
+                item.Category = Utility.GetCategoryById(catId).Name;
+
+            var pc = new System.Globalization.PersianCalendar();
+            //pc.Get
+            // TODO پر کردن دسته و موبایل
             return View(item);
         }
 
@@ -43,12 +48,9 @@ namespace Bekhar.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Location,City,Category")] Kala kala)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
-                //var Username = User.Identity.Name;
                 kala.Username = User.Identity.Name;
-                //var userId = _core.FindUserId(UserName, false);
-                //var newProject = project;
                 kala.CreationTime = DateTime.Now;
                 ElasticEngine.AddKala(kala);
                 return RedirectToAction("Index", "Home", null);

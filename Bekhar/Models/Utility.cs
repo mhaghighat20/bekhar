@@ -28,6 +28,11 @@ namespace Bekhar.Models
             };
         }
 
+        public static Category GetCategoryById(int id)
+        {
+            return Category.GetAllCategories().FirstOrDefault(x => x.Id == id);
+        }
+
         public static List<Category> GetAllCategories()
         {
             return Category.GetAllCategories().Where(x => x.ParentId == null).ToList();
