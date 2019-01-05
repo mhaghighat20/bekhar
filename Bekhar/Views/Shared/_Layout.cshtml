@@ -59,7 +59,7 @@
                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "ml-auto" }))
                 {
                     @Html.AntiForgeryToken()
-                    <a href="javascript:document.getElementById('logoutForm').submit()" class="bk-nav-link">Log off</a>
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="bk-nav-link mr-2">خروج</a>
                 }
 
                 <span class="white-text">
