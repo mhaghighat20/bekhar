@@ -58,14 +58,11 @@
                         <select class="browser-default custom-select" id="category">
                             <option value="" selected disabled>دسته بندی کالا را انتخاب کنید</option>
                             @{
-                                var dd = new int[5];
-                                dd[0] = 45;
-                                dd[1] = 33;
-                                dd[4] = 43;
+                                var categories = Bekhar.Models.Utility.GetAllCategories();
                             }
-                            @foreach (var i in dd)
+                            @foreach (var category in categories)
                             {
-                                <option value="@i">@i</option>
+                                <option value="@category.Id">@category.Name</option>
                             }
                         </select>
                     </div>
@@ -86,14 +83,11 @@
                         <select class="browser-default custom-select" id="city">
                             <option value="" selected disabled>شهر خود را انتخاب کنید</option>
                             @{
-                                var ff = new int[10];
-                                ff[0] = 45;
-                                ff[1] = 33;
-                                ff[4] = 43;
+                                var cities = Bekhar.Models.Utility.GetAllCities();
                             }
-                            @foreach (var i in ff)
+                            @foreach (var city in cities)
                             {
-                                <option value="@i">@i</option>
+                                <option value="@city">@city</option>
                             }
                         </select>
                     </div>
