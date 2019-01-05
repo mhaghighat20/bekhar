@@ -41,10 +41,9 @@ namespace Bekhar.Controllers
 
         // POST: Kala/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Mobile,Email,Location,City,Category")] Kala kala)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Location,City,Category")] Kala kala)
         {
-            // TODO ولیدیتور ها اصلاح شوند
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //var Username = User.Identity.Name;
                 kala.Username = User.Identity.Name;
@@ -55,8 +54,7 @@ namespace Bekhar.Controllers
                 return RedirectToAction("Index", "Home", null);
             }
 
-            return RedirectToAction("Index", "Home", null);
-
+            return View();
         }
 
         // GET: Kala/Edit/5

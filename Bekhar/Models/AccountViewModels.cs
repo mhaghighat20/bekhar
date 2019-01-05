@@ -65,6 +65,14 @@ namespace Bekhar.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "نام")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "شماره تلفن")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
