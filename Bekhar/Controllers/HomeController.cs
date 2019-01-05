@@ -12,29 +12,42 @@ namespace Bekhar.Controllers
     {
         public ActionResult Index()
         {
-            //List<Kala> kalas = new List<Kala>();
-            //foreach (Kala kala in GetSampleKalaData())
-            //    kalas.Add(kala);
+            var cat = Request.QueryString["cat"];
+            var city = Request.QueryString["city"];
+            var searchParameter = new SearchParameter();
 
-            var kalaList = ElasticEngine.GetAllKala();
+            if (!string.IsNullOrWhiteSpace(cat))
+                searchParameter.Category = cat;
+
+            if (!string.IsNullOrEmpty(city))
+                searchParameter.City = city;
+
+            var kalaList = ElasticEngine.GetKalaBySearchParam(searchParameter);
 
             return View(kalaList);
         }
 
         [HttpPost]
-        public ActionResult Index(string keyword, string category, string city, string location, long priceMin, long priceMax)
+        public ActionResult Index(string keyword, string location, long priceMin, long priceMax)
         {
-            var searchParam = new SearchParameter()
+            var searchParameter = new SearchParameter()
             {
                 Keyword = keyword,
-                Category = category,
-                City = city,
                 Location = location,
                 PriceMin = priceMin,
                 PriceMax = priceMax
             };
 
-            var kalaList = ElasticEngine.GetKalaBySearchParam(searchParam);
+            var cat = Request.QueryString["cat"];
+            var city = Request.QueryString["city"];
+
+            if (!string.IsNullOrWhiteSpace(cat))
+                searchParameter.Category = cat;
+
+            if (!string.IsNullOrEmpty(city))
+                searchParameter.City = city;
+
+            var kalaList = ElasticEngine.GetKalaBySearchParam(searchParameter);
 
             return View(kalaList);
         }
