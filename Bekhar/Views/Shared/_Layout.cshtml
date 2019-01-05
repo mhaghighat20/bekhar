@@ -56,9 +56,15 @@
             }
             else
             {
-                <span class="white-text ml-auto">
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "ml-auto" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="bk-nav-link">Log off</a>
+                }
+
+                <span class="white-text">
                     <i class="fa fa-user" style="font-size:1.2rem; "></i>
-                    <a href="/Kala">
+                    <a class="bk-nav-link" href="/Kala">
                         @User.Identity.GetUserName()
                     </a>
                 </span>
