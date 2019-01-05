@@ -55,7 +55,7 @@
                 <div class="col-3">
                     <label for="category">دسته بندی</label>
                     <div class="input-group">
-                        <select class="browser-default custom-select" id="category">
+                        <select class="browser-default custom-select" id="category" name="Category">
                             <option value="" selected disabled>دسته بندی کالا را انتخاب کنید</option>
                             @{
                                 var categories = Bekhar.Models.Utility.GetAllCategories();
@@ -80,7 +80,7 @@
                 <div class="col">
                     <label for="city">شهر</label>
                     <div class="input-group">
-                        <select class="browser-default custom-select" id="city">
+                        <select class="browser-default custom-select" id="city" name="City">
                             <option value="" selected disabled>شهر خود را انتخاب کنید</option>
                             @{
                                 var cities = Bekhar.Models.Utility.GetAllCities();
@@ -95,7 +95,7 @@
                 <div class="col">
                     <label for="zone">محله</label>
                     <div class="input-group">
-                        <input type="text" id="zone" class="form-control" placeholder="نام محله خود را وارد کنید" />
+                        <input type="text" id="zone" name="Location" class="form-control" placeholder="نام محله خود را وارد کنید" />
                     </div>
                 </div>
                 <div class="col">
@@ -118,12 +118,6 @@
                 </div>
             </div>
             
-            <div>
-                <div class="form-group">
-                    <label for="email">ایمیل</label>
-                    <input type="text" class="form-control" name="Email">
-                </div>
-            </div>
             <div class="row mr-1" style="direction:ltr;">
                 <input type="submit" class="btn deep-orange" value="ثبت آگهی" />
             </div>
