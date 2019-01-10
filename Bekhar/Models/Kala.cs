@@ -38,5 +38,7 @@ namespace Bekhar.Models
         public string Location { get; set; }
 
         public string Username { get; set; }
+
+        public ModelType Type { get; set; } = ModelType.Kala;
     }
 }

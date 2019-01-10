@@ -11,5 +11,13 @@ namespace Bekhar.Models
         public string Username { get; set; }
         public DateTime CreationTime { get; set; }
         public long Amount { get; set; }
+
+        public ModelType Type { get; set; } = ModelType.Transaction;
+    }
+
+    public enum ModelType : byte
+    {
+        Kala,
+        Transaction
     }
 }

@@ -59,6 +59,13 @@ namespace Bekhar.Elastic
             return AssignIds(response, result);
         }
 
+        internal static void AddTranasction(Transaction transaction)
+        {
+            var response = EsClient.GetInstance().IndexDocument<Transaction>(transaction);
+            ValidateResponse(response);
+            EsClient.GetInstance().Refresh("bekhar");
+        }
+
         public static QueryContainer GetQuery(SearchParameter searchParameter)
         {
             var result = new List<QueryContainer>();

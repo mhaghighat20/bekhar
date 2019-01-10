@@ -199,6 +199,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KalaController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Elastic\ElasticEngine.cs" />
     <Compile Include="Elastic\EsClient.cs" />
     <Compile Include="Elastic\SearchParameter.cs" />
@@ -275,6 +276,7 @@
     <Content Include="Views\Kala\Index.cshtml" />
     <Content Include="Views\Kala\Details.cshtml" />
     <Content Include="Views\Kala\Delete.cshtml" />
+    <Content Include="Views\Transaction\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
