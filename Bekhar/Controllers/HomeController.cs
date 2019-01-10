@@ -28,7 +28,7 @@ namespace Bekhar.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string keyword, string location, long? priceMin, long? priceMax)
+        public ActionResult Index(string keyword, string location, long? priceMin, long? priceMax, string city)
         {
             var searchParameter = new SearchParameter()
             {
@@ -38,8 +38,13 @@ namespace Bekhar.Controllers
                 PriceMax = priceMax
             };
 
+            ViewBag.keyword = keyword;
+            ViewBag.location = location;
+            ViewBag.city = city;
+            ViewBag.priceMin = priceMin;
+            ViewBag.priceMax = priceMax;
+
             var cat = Request.QueryString["cat"];
-            var city = Request.QueryString["city"];
 
             if (!string.IsNullOrWhiteSpace(cat))
                 searchParameter.Category = cat;

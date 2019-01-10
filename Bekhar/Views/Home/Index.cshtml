@@ -11,10 +11,10 @@
         </div>
 
         <ul class="list-group components">
-            @{ 
+            @{
                 var categories = Bekhar.Models.Utility.GetAllCategories();
             }
-            @foreach(Bekhar.Models.Category category in categories)
+            @foreach (Bekhar.Models.Category category in categories)
             {
                 <li class="list-group-item sidebar-item">
                     @if (@Request.QueryString["cat"] == @category.Id.ToString())
@@ -30,7 +30,7 @@
                         </a>
                     }
                 </li>
-                
+
             }
             <!--
             <li class="list-group-item sidebar-item">
@@ -65,12 +65,12 @@
     </nav>
 
     <div class="container-fluid pt-4 px-4 yekan">
-        <form method="post" action="~/Home/Index" id="search-form">
+        <form method="post" action="/?@(Request.QueryString.ToString())" id="search-form">
             <div class="jumbotron mx-2" style="">
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="عنوان کالای مورد نظر را وارد کنید" name="keyword" />
+                            <input type="text" class="form-control" placeholder="عنوان کالای مورد نظر را وارد کنید" name="keyword" value="@ViewBag.keyword" />
                         </div>
                     </div>
                     <div class="col">
@@ -78,11 +78,11 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">قیمت از</span>
                             </div>
-                            <input type="text" class="form-control" name="PriceMin" />
+                            <input type="text" class="form-control" name="PriceMin" value="@ViewBag.priceMin" />
                             <div class="input-group-postpond">
                                 <span class="input-group-text">تا</span>
                             </div>
-                            <input type="text" class="form-control" name="PriceMax" />
+                            <input type="text" class="form-control" name="PriceMax" value="@ViewBag.priceMax" />
                         </div>
                     </div>
                 </div>
@@ -90,20 +90,31 @@
                     <div class="col">
                         <div class="input-group">
                             <select class="browser-default custom-select" id="city" name="City">
-                                <option value="" selected disabled>شهر خود را انتخاب کنید</option>
                                 @{
                                     var cities = Bekhar.Models.Utility.GetAllCities();
                                 }
-                                @foreach (var city in cities)
+                                @if (ViewBag.city == null)
                                 {
-                                    <option value="@city">@city</option>
+                                    <option value="" selected disabled>شهر خود را انتخاب کنید</option>
+                                    foreach (var city in cities)
+                                    {
+                                        <option value="@city">@city</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">شهر خود را انتخاب کنید</option>
+                                    foreach (var city in cities)
+                                    {
+                                        <option value="@city" selected="@(city == ViewBag.city)">@city</option>
+                                    }
                                 }
                             </select>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group">
-                            <input type="text" id="zone" name="Location" class="form-control" placeholder="نام محله خود را وارد کنید" />
+                            <input type="text" id="zone" name="Location" class="form-control" placeholder="نام محله خود را وارد کنید" value="@ViewBag.location" />
                         </div>
                     </div>
                     <div class="col">
@@ -129,7 +140,7 @@
                         <a class="btn btn-deep-orange font-weight-bold" href="~/Kala/Details/@kala.Id">خرید</a>
                     </div>
                 </div>
-                }       
+            }
         </div>
     </div>
 </div>

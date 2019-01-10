@@ -64,7 +64,7 @@ namespace Bekhar.Elastic
             var result = new List<QueryContainer>();
 
             if (!string.IsNullOrWhiteSpace(searchParameter.Keyword))
-                result.Add(new MultiMatchQuery() { Query = searchParameter.Keyword, Fields = new[] { "description", "name" } });
+                result.Add(new MultiMatchQuery() { Query = searchParameter.Keyword, Fields = new[] { "description", "name" }, Fuzziness = Fuzziness.EditDistance(1) });
 
             if (!string.IsNullOrWhiteSpace(searchParameter.Category))
                 result.Add(new MatchQuery() { Query = searchParameter.Category, Field = "category" });

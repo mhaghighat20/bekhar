@@ -1,5 +1,6 @@
 ﻿using Bekhar.Elastic;
 using Bekhar.Models;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,19 @@ namespace Bekhar.Controllers
     [Authorize]
     public class KalaController : Controller
     {
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: Kala
         public ActionResult Index()
         {
@@ -31,6 +45,10 @@ namespace Bekhar.Controllers
 
             if (int.TryParse(item.Category, out var catId))
                 item.Category = Utility.GetCategoryById(catId).Name;
+
+            var user = UserManager.FindByNameAsync(item.Username).Result;
+            item.Mobile = user.PhoneNumber;
+            item.Email = user.Email;
 
             return View(item);
         }

@@ -18,6 +18,7 @@ namespace Bekhar.Models
         }
 
         public string MyName { get; set; }
+        public long Money { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -31,5 +32,7 @@ namespace Bekhar.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Bekhar.Models.Transaction> Transactions { get; set; }
     }
 }
