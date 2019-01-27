@@ -59,6 +59,20 @@ namespace Bekhar.Elastic
             return AssignIds(response, result);
         }
 
+        internal static List<Transaction> GetTransactionByUsername(string username)
+        {
+            var query = new MatchQuery() { Query = username, Field = "username" };
+            var response = EsClient.GetInstance().Search<Transaction>(s =>
+                s.Query(
+                    q => query
+                    ));
+
+            ValidateResponse(response);
+
+            var result = response.Documents.ToList();
+            return result; // TODO Assign Ids
+        }
+
         internal static void AddTranasction(Transaction transaction)
         {
             var response = EsClient.GetInstance().IndexDocument<Transaction>(transaction);

@@ -277,6 +277,7 @@
     <Content Include="Views\Kala\Details.cshtml" />
     <Content Include="Views\Kala\Delete.cshtml" />
     <Content Include="Views\Transaction\Create.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

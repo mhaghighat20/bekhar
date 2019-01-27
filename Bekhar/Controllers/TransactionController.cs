@@ -25,9 +25,11 @@ namespace Bekhar.Controllers
         }
 
         // GET: Transaction
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            List<Transaction> items = ElasticEngine.GetTransactionByUsername(User.Identity.Name);
+            return View(items);
         }
 
         // GET: Transaction/Details/5

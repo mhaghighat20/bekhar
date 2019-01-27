@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Bekhar.Models.Transaction>
+
+@{
+    ViewBag.Title = "تراکنش های کاربر";
+}
+
+<h2>تراکنش های کاربر</h2>
+
+<p>
+    @Html.ActionLink("افزایش اعتبار", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+    </tr>
+}
+
+</table>
