@@ -15,7 +15,7 @@ namespace Bekhar.Elastic
             {
                 //var settings = new ConnectionSettings(new Uri("http://localhost:9200")).DefaultIndex("bekhar").DisableDirectStreaming();
 
-                var settings = new ConnectionSettings(new Uri("https://elastic:Hq7ntRjOu8BQzQhhVB2ZSpws@58ef425b3817474986de023092358b39.eu-central-1.aws.cloud.es.io:9243")).DefaultIndex("bekhar").DisableDirectStreaming();
+                var settings = new ConnectionSettings(new Uri("https://elastic:1IeomFYO4yVyqzlrO95SpXFy@a8769f2176114de3ac5fb6371bd61b21.eu-central-1.aws.cloud.es.io:9243")).DefaultIndex("bekhar").DisableDirectStreaming();
                 innerClient = new ElasticClient(settings);
             }
 
