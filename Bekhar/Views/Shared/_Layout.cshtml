@@ -41,10 +41,13 @@
             </ul>
 
 
+            
+
+            <!--
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="mdi mdi-menu-open"></i>
             </button>
-
+            -->
 
             @if (!Request.IsAuthenticated)
             {
@@ -59,15 +62,21 @@
                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "ml-auto" }))
                 {
                     @Html.AntiForgeryToken()
-                    <a href="javascript:document.getElementById('logoutForm').submit()" class="bk-nav-link mr-2">خروج</a>
                 }
 
-                <span class="white-text">
-                    <i class="fa fa-user" style="font-size:1.2rem; "></i>
-                    <a class="bk-nav-link" href="/Kala">
-                        @User.Identity.GetUserName()
-                    </a>
-                </span>
+                    <div class="dropdown show white-text">
+                        <a class="btn btn-outline-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user mr-3" style="font-size:1.2rem;"></i>
+                            @User.Identity.Name
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                <li class="dropdown-item" ><a href="/Manage">پروفایل</a></li>
+                                <li class="dropdown-item"><a href="/Transaction">لیست تراکنش ها</a></li>
+                                <li class="dropdown-divider"></li>
+                                <li class="dropdown-item"><a href="javascript:document.getElementById('logoutForm').submit()">خروج</a></li>
+                        </ul>
+                    </div>
 
                 <a class="btn btn-outline-white white-text yekan px-3 ml-3" href="~/Kala/Create">
                     <span style="vertical-align: top; font-weight: bold; font-size: 1rem;"> آگهی جدید </span>
@@ -77,30 +86,32 @@
         </nav>
     </header>
     @RenderBody()
-    <!--
-    <footer class="page-footer font-small blue-grey darken-2">
-
-        <!-- Copyright >
-        <div class="footer-copyright text-center py-3" style="direction:ltr;">
-            © 2018 Copyright:
-            <a href="#"> RishMinds </a>
-        </div>
-        <!-- Copyright >
-
-    </footer>
-    -->
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.0/js/mdb.min.js" integrity="sha256-RyKFOSKnuKFSYAyJlfeHdb8ljBAbLJOSh9Bz8pzhhkY=" crossorigin="anonymous"></script>
+    
+    
+    @*
     @{ var jq = "~/Content/js/jquery-3.3.1.min.js";
         var md = "~/Content/js/mdb.min.js";
     }
     <script type="text/javascript" src="@Href(jq)"></script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
     <script src="@Href(md)"></script>
-
+    *@
+    @*
     @Scripts.Render("~/bundles/jquery")
     <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
     @Scripts.Render("~/bundles/bootstrap")
     <script src="@Href(md)"></script>
+
+    *@
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
