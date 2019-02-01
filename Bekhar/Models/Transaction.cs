@@ -10,6 +10,8 @@ namespace Bekhar.Models
     {
         public string Id { get; set; }
         public string Username { get; set; }
+
+        [Display(Name = "تاریخ")]
         public DateTime CreationTime { get; set; }
 
         [Display(Name = "مبلغ")]

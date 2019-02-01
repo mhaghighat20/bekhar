@@ -1,33 +1,92 @@
 ﻿@model IEnumerable<Bekhar.Models.Transaction>
 
 @{
-    ViewBag.Title = "تراکنش های کاربر";
+    Page.Title = "لیست تراکنش ها";
 }
 
-<h2>تراکنش های کاربر</h2>
 
-<p>
-    @Html.ActionLink("افزایش اعتبار", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-    </tr>
+<div class="container">
+    <div class="card mt-3 w-75 mx-auto">
+        <div class="card-header d-flex">
+            <h5 class="text-center align-middle mt-2">
+                تراکنش های کاربر
+            </h5>
+            <a class="btn btn-success ml-auto my-0" href="/Transaction/Create">
+                اعتبار <i class="fas fa-plus align-middle ml-1" style="font-size:1rem"></i>
+            </a>
+        </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreationTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-    </tr>
-}
+        
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th class="col-1 text-center">
+                        #
+                    </th>
+                    <th class="col-7">
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th class="col-2">
+                        @Html.DisplayNameFor(model => model.CreationTime)
+                    </th>
+                    <th class="col-2">
+                        اطلاعات
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center p-2 align-middle">
+                        1
+                    </td>
+                    <td class="p-2 align-middle">
+                        2500000
+                    </td>
+                    <td class="p-2 align-middle">
+                        07-11-97
+                    </td>
+                    <td class="p-2 align-middle">
+                        <a href="#" class="btn btn-primary m-0 py-2 px-3">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center p-2 align-middle">
+                        2
+                    </td>
+                    <td class="p-2 align-middle">
+                        120000
+                    </td>
+                    <td class="p-2 align-middle">
+                        now
+                    </td>
+                    <td class="p-2 align-middle">
+                        <a href="#" class="btn btn-primary m-0 py-2 px-3">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </td>
+                </tr>
 
-</table>
+                @{var i = 0;}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreationTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                    </tr>
+                    {
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
