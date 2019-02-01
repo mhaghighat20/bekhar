@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Bekhar.Models.Transaction>
+﻿@using Bekhar.Models;
+@model IEnumerable<Bekhar.Models.Transaction>
 
 @{
     Page.Title = "لیست تراکنش ها";
@@ -24,10 +25,10 @@
                     <th class="col-1 text-center">
                         #
                     </th>
-                    <th class="col-7">
+                    <th class="col-6">
                         @Html.DisplayNameFor(model => model.Amount)
                     </th>
-                    <th class="col-2">
+                    <th class="col-3">
                         @Html.DisplayNameFor(model => model.CreationTime)
                     </th>
                     <th class="col-2">
@@ -36,51 +37,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center p-2 align-middle">
-                        1
-                    </td>
-                    <td class="p-2 align-middle">
-                        2500000
-                    </td>
-                    <td class="p-2 align-middle">
-                        07-11-97
-                    </td>
-                    <td class="p-2 align-middle">
-                        <a href="#" class="btn btn-primary m-0 py-2 px-3">
-                            <i class="fas fa-search"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center p-2 align-middle">
-                        2
-                    </td>
-                    <td class="p-2 align-middle">
-                        120000
-                    </td>
-                    <td class="p-2 align-middle">
-                        now
-                    </td>
-                    <td class="p-2 align-middle">
-                        <a href="#" class="btn btn-primary m-0 py-2 px-3">
-                            <i class="fas fa-search"></i>
-                        </a>
-                    </td>
-                </tr>
-
-                @{var i = 0;}
+                @{var i = 1;}
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="text-center">
+                        <td class="text-center p-2 align-middle">
                             @i
                         </td>
-                        <td>
+                        <td class="p-2 align-middle">
                             @Html.DisplayFor(modelItem => item.Amount)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreationTime)
+                        <td class="p-2 align-middle">
+                            @item.CreationTime.GetPersianStr()
                         </td>
                         <td class="p-2 align-middle">
                             <a href="#" class="btn btn-primary m-0 py-2 px-3">
