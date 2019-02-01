@@ -146,8 +146,6 @@ namespace Bekhar.Elastic
                 return new BoolQuery() { Must = result };
         }
 
-
-
         private static List<T> AssignIds<T>(ISearchResponse<T> response, List<T> result) where T : ElasticDocument
         {
             int counter = 0;
@@ -165,6 +163,26 @@ namespace Bekhar.Elastic
             ValidateResponse(response);
 
             return response.Hits.First().Source;
+        }
+
+        internal static Kharid GetKharidById(string id)
+        {
+            var response = EsClient.GetInstance(KharidName).Search<Kharid>(s => s.Query(q => q.Ids(ids => ids.Values(new List<Id>() { id }))));
+            ValidateResponse(response);
+
+            return response.Hits.First().Source;
+        }
+
+        public static void SetApprovedKharid(string id)
+        {
+            var partialDoc = new Kharid() { State = KharidState.Completed };
+            var path = DocumentPath<Kharid>.Id(id);
+
+            EsClient.GetInstance(KharidName).Update<Kharid, Kharid>(path,
+                u => u.Index(KharidName)
+                .Doc(partialDoc));
+
+            EsClient.GetInstance(KharidName).Refresh(KharidName);
         }
 
         private static void ValidateResponse(IResponse reponse)

@@ -37,11 +37,18 @@ namespace Bekhar.Controllers
             var items = ElasticEngine.GetKharidByUserName(username);
 
             foreach (var item in items)
-                if (item.KharidarUsername == username)
-                    if (item.State == KharidState.WaitForApprove)
-                        item.canBeApproved = true;
+                item.canBeApproved = CanBeApproved(username, item);
 
             return View(items);
+        }
+
+        private static bool CanBeApproved(string username, Kharid item)
+        {
+            if (item.KharidarUsername == username)
+                if (item.State == KharidState.WaitForApprove)
+                    return true;
+
+            return false;
         }
 
         // GET: Kharids/Details/5
@@ -133,15 +140,18 @@ namespace Bekhar.Controllers
         public ActionResult Edit(string id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Kharid kharid = null;// db.Kharids.Find(id);
+            
+            Kharid kharid = ElasticEngine.GetKharidById(id);
             if (kharid == null)
-            {
                 return HttpNotFound();
-            }
-            return View(kharid);
+
+            if (!CanBeApproved(User.Identity.Name, kharid))
+                throw new InvalidOperationException("در خواست نامعتبر");
+
+            ElasticEngine.SetApprovedKharid(id);
+
+            return RedirectToAction("Index");
         }
 
         // POST: Kharids/Edit/5
