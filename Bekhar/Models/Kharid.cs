@@ -20,6 +20,9 @@ namespace Bekhar.Models
         [JsonIgnore]
         public bool canBeApproved;
 
+        [JsonIgnore]
+        public bool buyOrSell;
+
         public ModelType DataType { get; set; } = ModelType.Kharid;
     }
 

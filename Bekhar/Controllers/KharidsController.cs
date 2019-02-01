@@ -39,6 +39,9 @@ namespace Bekhar.Controllers
             foreach (var item in items)
                 item.canBeApproved = CanBeApproved(username, item);
 
+            foreach (var item in items)
+                item.buyOrSell = item.KharidarUsername == username;
+
             return View(items);
         }
 
