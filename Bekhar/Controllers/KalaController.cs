@@ -13,7 +13,7 @@ namespace Bekhar.Controllers
     public class KalaController : Controller
     {
         private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
+        public  ApplicationUserManager UserManager
         {
             get
             {
@@ -41,6 +41,13 @@ namespace Bekhar.Controllers
         [AllowAnonymous]
         public ActionResult Details(string id)
         {
+            Kala item = GetKala(id);
+
+            return View(item);
+        }
+
+        public Kala GetKala(string id)
+        {
             Kala item = ElasticEngine.GetKalaById(id);
 
             if (int.TryParse(item.Category, out var catId))
@@ -49,8 +56,7 @@ namespace Bekhar.Controllers
             var user = UserManager.FindByNameAsync(item.Username).Result;
             item.Mobile = user.PhoneNumber;
             item.Email = user.Email;
-
-            return View(item);
+            return item;
         }
 
         // GET: Kala/Create

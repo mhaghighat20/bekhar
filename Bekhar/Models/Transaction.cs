@@ -23,6 +23,7 @@ namespace Bekhar.Models
     public enum ModelType : byte
     {
         Kala,
-        Transaction
+        Transaction,
+        Kharid
     }
 }

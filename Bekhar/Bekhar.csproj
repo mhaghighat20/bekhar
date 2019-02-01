@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KalaController.cs" />
+    <Compile Include="Controllers\KharidsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Elastic\ElasticEngine.cs" />
@@ -206,10 +207,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kala.cs" />
+    <Compile Include="Models\Kharid.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Utility.cs" />
@@ -278,9 +281,15 @@
     <Content Include="Views\Kala\Delete.cshtml" />
     <Content Include="Views\Transaction\Create.cshtml" />
     <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Kharids\Delete.cshtml" />
+    <Content Include="Views\Kharids\Details.cshtml" />
+    <Content Include="Views\Kharids\Edit.cshtml" />
+    <Content Include="Views\Kharids\Index.cshtml" />
+    <Content Include="Views\Kharids\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Kharid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

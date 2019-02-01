@@ -34,5 +34,9 @@ namespace Bekhar.Models
         }
 
         public System.Data.Entity.DbSet<Bekhar.Models.Transaction> Transactions { get; set; }
+
+        public System.Data.Entity.DbSet<Bekhar.Models.Kharid> Kharids { get; set; }
+
+        public System.Data.Entity.DbSet<Bekhar.Models.Kala> Kalas { get; set; }
     }
 }
