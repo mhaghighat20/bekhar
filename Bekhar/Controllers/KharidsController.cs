@@ -6,13 +6,28 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Bekhar.Elastic;
 using Bekhar.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Bekhar.Controllers
 {
     public class KharidsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Kharids
         public ActionResult Index()
@@ -41,8 +56,9 @@ namespace Bekhar.Controllers
             if (string.IsNullOrWhiteSpace(kalaId))
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var kala = new KalaController().GetKala(kalaId);
-            return View();
+            var kala = KalaController.GetKala(kalaId, UserManager);
+            // TODO عدم نمایش کالای خریداری شده
+            return View(kala);
         }
 
         // POST: Kharids/Create
@@ -50,16 +66,55 @@ namespace Bekhar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,KalaId,KharidarUsername,ForoshandeUsername,State,DataType")] Kharid kharid)
+        public ActionResult Create()
         {
-            if (ModelState.IsValid)
-            {
-                //db.Kharids.Add(kharid);
-                //db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            var kalaId = Request.QueryString["kalaId"];
+            var kala = KalaController.GetKala(kalaId, UserManager);
+            var money = GetUserMoney(User.Identity.Name);
 
-            return View(kharid);
+            if (kala.Price > money)
+                return RedirectToAction("Create", "Transaction", null);
+
+            var kharid = new Kharid()
+            {
+                ForoshandeUsername = kala.Username,
+                KharidarUsername = User.Identity.Name,
+                KalaId = kalaId,
+                State = KharidState.WaitForApprove
+            };
+
+            ChangeUserMoney(User.Identity.Name, kala.Price.Value, false);
+            ElasticEngine.AddKharid(kharid);
+            return RedirectToAction("Index");
+            //if (ModelState.IsValid)
+            //{
+            //    //db.Kharids.Add(kharid);
+            //    //db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            //return View(kharid);
+        }
+
+        private long GetUserMoney(string userName)
+        {
+            return UserManager.FindByNameAsync(userName).Result.Money;
+        }
+
+        public static void ChangeUserMoney(string username, long amount, bool increaseOrDecrease)
+        {
+            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(store);
+
+            var user = manager.FindByNameAsync(username).Result;
+            if (increaseOrDecrease)
+                user.Money += amount;
+            else
+                user.Money -= amount;
+
+            manager.UpdateAsync(user);
+            var ctx = store.Context;
+            ctx.SaveChanges();
         }
 
         // GET: Kharids/Edit/5
@@ -86,8 +141,8 @@ namespace Bekhar.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(kharid).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(kharid).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(kharid);
@@ -123,7 +178,7 @@ namespace Bekhar.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -41,21 +41,22 @@ namespace Bekhar.Controllers
         [AllowAnonymous]
         public ActionResult Details(string id)
         {
-            Kala item = GetKala(id);
+            Kala item = GetKala(id, UserManager);
 
             return View(item);
         }
 
-        public Kala GetKala(string id)
+        public static Kala GetKala(string id, ApplicationUserManager userManager)
         {
             Kala item = ElasticEngine.GetKalaById(id);
 
             if (int.TryParse(item.Category, out var catId))
                 item.Category = Utility.GetCategoryById(catId).Name;
 
-            var user = UserManager.FindByNameAsync(item.Username).Result;
+            var user = userManager.FindByNameAsync(item.Username).Result;
             item.Mobile = user.PhoneNumber;
             item.Email = user.Email;
+            item.Id = id;
             return item;
         }
 

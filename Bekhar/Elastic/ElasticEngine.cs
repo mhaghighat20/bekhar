@@ -80,6 +80,13 @@ namespace Bekhar.Elastic
             EsClient.GetInstance().Refresh("bekhar");
         }
 
+        internal static void AddKharid(Kharid kharid)
+        {
+            var response = EsClient.GetInstance().IndexDocument<Kharid>(kharid);
+            ValidateResponse(response);
+            EsClient.GetInstance().Refresh("bekhar");
+        }
+
         public static QueryContainer GetQuery(SearchParameter searchParameter)
         {
             var result = new List<QueryContainer>();

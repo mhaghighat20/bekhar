@@ -28,6 +28,8 @@ namespace Bekhar.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            ViewBag.Money = user.Money;
             List<Transaction> items = ElasticEngine.GetTransactionByUsername(User.Identity.Name);
             return View(items);
         }
@@ -48,29 +50,25 @@ namespace Bekhar.Controllers
         // POST: Transaction/Create
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Amount")] Transaction transaction)
         {
-            try
-            {
-                transaction.Id = null;
-                transaction.Username = User.Identity.Name;
-                transaction.CreationTime = DateTime.Now;
 
-                if (transaction.Amount <= 0)
-                    throw new InvalidCastException("Invalid amount");
+            transaction.Id = null;
+            transaction.Username = User.Identity.Name;
+            transaction.CreationTime = DateTime.Now;
 
-                ElasticEngine.AddTranasction(transaction);
+            if (transaction.Amount <= 0)
+                throw new InvalidCastException("Invalid amount");
 
-                var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-                user.Money += transaction.Amount;
-                UserManager.UpdateAsync(user).Wait();
+            ElasticEngine.AddTranasction(transaction);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            KharidsController.ChangeUserMoney(transaction.Username, transaction.Amount, true);
+            //var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            //user.Money += transaction.Amount;
+            //UserManager.UpdateAsync(user).Wait();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Transaction/Edit/5
