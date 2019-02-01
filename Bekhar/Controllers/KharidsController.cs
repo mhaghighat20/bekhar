@@ -17,7 +17,7 @@ namespace Bekhar.Controllers
         // GET: Kharids
         public ActionResult Index()
         {
-            return View(db.Kharids.ToList());
+            return View(/*db.Kharids.ToList()*/);
         }
 
         // GET: Kharids/Details/5
@@ -27,7 +27,7 @@ namespace Bekhar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kharid kharid = db.Kharids.Find(id);
+            Kharid kharid = null; // db.Kharids.Find(id);
             if (kharid == null)
             {
                 return HttpNotFound();
@@ -54,8 +54,8 @@ namespace Bekhar.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Kharids.Add(kharid);
-                db.SaveChanges();
+                //db.Kharids.Add(kharid);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +69,7 @@ namespace Bekhar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kharid kharid = db.Kharids.Find(id);
+            Kharid kharid = null;// db.Kharids.Find(id);
             if (kharid == null)
             {
                 return HttpNotFound();
@@ -100,7 +100,7 @@ namespace Bekhar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kharid kharid = db.Kharids.Find(id);
+            Kharid kharid = null; //db.Kharids.Find(id);
             if (kharid == null)
             {
                 return HttpNotFound();
@@ -113,9 +113,9 @@ namespace Bekhar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Kharid kharid = db.Kharids.Find(id);
-            db.Kharids.Remove(kharid);
-            db.SaveChanges();
+            //Kharid kharid = db.Kharids.Find(id);
+            //db.Kharids.Remove(kharid);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
