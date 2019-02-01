@@ -6,9 +6,8 @@ using System.Web;
 
 namespace Bekhar.Models
 {
-    public class Kala //: ElasticDocument
+    public class Kala : ElasticDocument
     {
-        public string Id { get; set; }
 
         [Display(Name = "عنوان کالا")]
         [Required(ErrorMessage = "وارد کردن عنوان ضروری است.")]

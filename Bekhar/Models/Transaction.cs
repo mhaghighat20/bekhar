@@ -6,9 +6,8 @@ using System.Web;
 
 namespace Bekhar.Models
 {
-    public class Transaction //: ElasticDocument
+    public class Transaction : ElasticDocument
     {
-        public string Id { get; set; }
         public string Username { get; set; }
 
         [Display(Name = "تاریخ")]
@@ -16,6 +15,8 @@ namespace Bekhar.Models
 
         [Display(Name = "مبلغ")]
         public long Amount { get; set; }
+
+        public PurposeType Purpose { get; set; }
 
         public ModelType DataType { get; set; } = ModelType.Transaction;
     }
@@ -27,7 +28,15 @@ namespace Bekhar.Models
         Kharid
     }
 
-    //public class ElasticDocument
-    //{
-    //}
+    public enum PurposeType : byte
+    {
+        ChargeAccount,
+        Buy,
+        Sell
+    }
+
+    public class ElasticDocument
+    {
+        public string Id { get; set; }
+    }
 }

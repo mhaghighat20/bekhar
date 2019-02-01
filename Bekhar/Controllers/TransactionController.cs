@@ -57,6 +57,7 @@ namespace Bekhar.Controllers
             transaction.Id = null;
             transaction.Username = User.Identity.Name;
             transaction.CreationTime = DateTime.Now;
+            transaction.Purpose = PurposeType.ChargeAccount;
 
             if (transaction.Amount <= 0)
                 throw new InvalidCastException("Invalid amount");

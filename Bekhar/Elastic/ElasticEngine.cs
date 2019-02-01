@@ -66,6 +66,29 @@ namespace Bekhar.Elastic
             return result; // TODO Assign Ids
         }
 
+        internal static List<Kharid> GetKharidByUserName(string username)
+        {
+            var query = new BoolQuery()
+            {
+                Should = new List<QueryContainer>()
+                {
+                    new MatchQuery() { Query = username, Field = "kharidarUsername" },
+                    new MatchQuery() { Query = username, Field = "foroshandeUsername" }
+                }
+            };
+
+            var response = EsClient.GetInstance(KharidName).Search<Kharid>(s =>
+                s.Query(
+                    q => query
+                    ));
+
+            ValidateResponse(response);
+
+            var result = response.Documents.ToList();
+            AssignIds(response, result);
+            return result;
+        }
+
         static string KalaName = typeof(Kala).Name.ToLower();
         static string TransactionName = typeof(Transaction).Name.ToLower();
         static string KharidName = typeof(Kharid).Name.ToLower();
@@ -125,7 +148,7 @@ namespace Bekhar.Elastic
 
 
 
-        private static List<Kala> AssignIds(ISearchResponse<Kala> response, List<Kala> result)
+        private static List<T> AssignIds<T>(ISearchResponse<T> response, List<T> result) where T : ElasticDocument
         {
             int counter = 0;
             foreach (var id in response.Hits.Select(x => x.Id))

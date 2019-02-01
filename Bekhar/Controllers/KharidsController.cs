@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Bekhar.Controllers
 {
+    [Authorize]
     public class KharidsController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -32,7 +33,15 @@ namespace Bekhar.Controllers
         // GET: Kharids
         public ActionResult Index()
         {
-            return View(/*db.Kharids.ToList()*/);
+            var username = User.Identity.Name;
+            var items = ElasticEngine.GetKharidByUserName(username);
+
+            foreach (var item in items)
+                if (item.KharidarUsername == username)
+                    if (item.State == KharidState.WaitForApprove)
+                        item.canBeApproved = true;
+
+            return View(items);
         }
 
         // GET: Kharids/Details/5
@@ -80,20 +89,23 @@ namespace Bekhar.Controllers
                 ForoshandeUsername = kala.Username,
                 KharidarUsername = User.Identity.Name,
                 KalaId = kalaId,
-                State = KharidState.WaitForApprove
+                State = KharidState.WaitForApprove,
+                CreationTime = DateTime.Now
+            };
+
+            var transaction = new Transaction()
+            {
+                Amount = -kala.Price.Value,
+                Purpose = PurposeType.Buy,
+                Username = User.Identity.Name,
+                CreationTime = DateTime.Now,
             };
 
             ChangeUserMoney(User.Identity.Name, kala.Price.Value, false);
             ElasticEngine.AddKharid(kharid);
-            return RedirectToAction("Index");
-            //if (ModelState.IsValid)
-            //{
-            //    //db.Kharids.Add(kharid);
-            //    //db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
+            ElasticEngine.AddTranasction(transaction);
 
-            //return View(kharid);
+            return RedirectToAction("Index");
         }
 
         private long GetUserMoney(string userName)
