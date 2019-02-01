@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Bekhar.Models
 {
-    public class Kharid
+    public class Kharid //: ElasticDocument
     {
         public string Id { get; set; }
 

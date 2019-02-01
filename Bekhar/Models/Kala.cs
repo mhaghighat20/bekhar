@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Bekhar.Models
 {
-    public class Kala
+    public class Kala //: ElasticDocument
     {
         public string Id { get; set; }
 

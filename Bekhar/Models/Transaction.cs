@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Bekhar.Models
 {
-    public class Transaction
+    public class Transaction //: ElasticDocument
     {
         public string Id { get; set; }
         public string Username { get; set; }
@@ -26,4 +26,8 @@ namespace Bekhar.Models
         Transaction,
         Kharid
     }
+
+    //public class ElasticDocument
+    //{
+    //}
 }

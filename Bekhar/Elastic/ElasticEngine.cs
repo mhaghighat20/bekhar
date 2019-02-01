@@ -9,16 +9,9 @@ namespace Bekhar.Elastic
 {
     public static class ElasticEngine
     {
-        public static void AddKala(Kala kala)
-        {
-            var response = EsClient.GetInstance().IndexDocument<Kala>(kala);
-            ValidateResponse(response);
-            EsClient.GetInstance().Refresh("bekhar");
-        }
-
         internal static List<Kala> GetAllKala()
         {
-            var response = EsClient.GetInstance().Search<Kala>();
+            var response = EsClient.GetInstance(KalaName).Search<Kala>();
             ValidateResponse(response);
 
             var result = response.Documents.ToList();
@@ -35,19 +28,19 @@ namespace Bekhar.Elastic
                 }
             };
 
-            var response = EsClient.GetInstance().DeleteByQuery<Kala>(d =>
+            var response = EsClient.GetInstance(KalaName).DeleteByQuery<Kala>(d =>
                 d.Query(
                     q => query
                 ));
 
             ValidateResponse(response);
-            EsClient.GetInstance().Refresh("bekhar");
+            EsClient.GetInstance(KalaName).Refresh(KalaName);
         }
 
         internal static List<Kala> GetKalaBySearchParam(SearchParameter searchParameter)
         {
             QueryContainer query = GetQuery(searchParameter);
-            var response = EsClient.GetInstance().Search<Kala>(s =>
+            var response = EsClient.GetInstance(KalaName).Search<Kala>(s =>
                 s.Query(
                     q => query
                 ));
@@ -62,7 +55,7 @@ namespace Bekhar.Elastic
         internal static List<Transaction> GetTransactionByUsername(string username)
         {
             var query = new MatchQuery() { Query = username, Field = "username" };
-            var response = EsClient.GetInstance().Search<Transaction>(s =>
+            var response = EsClient.GetInstance(TransactionName).Search<Transaction>(s =>
                 s.Query(
                     q => query
                     ));
@@ -73,18 +66,28 @@ namespace Bekhar.Elastic
             return result; // TODO Assign Ids
         }
 
+        static string KalaName = typeof(Kala).Name.ToLower();
+        static string TransactionName = typeof(Transaction).Name.ToLower();
+        static string KharidName = typeof(Kharid).Name.ToLower();
+        public static void AddKala(Kala kala)
+        {
+            var response = EsClient.GetInstance(KalaName).IndexDocument(kala);
+            ValidateResponse(response);
+            EsClient.GetInstance(KalaName).Refresh(KalaName);
+        }
+
         internal static void AddTranasction(Transaction transaction)
         {
-            var response = EsClient.GetInstance().IndexDocument<Transaction>(transaction);
+            var response = EsClient.GetInstance(TransactionName).IndexDocument(transaction);
             ValidateResponse(response);
-            EsClient.GetInstance().Refresh("bekhar");
+            EsClient.GetInstance(TransactionName).Refresh(TransactionName);
         }
 
         internal static void AddKharid(Kharid kharid)
         {
-            var response = EsClient.GetInstance().IndexDocument<Kharid>(kharid);
+            var response = EsClient.GetInstance(KharidName).IndexDocument(kharid);
             ValidateResponse(response);
-            EsClient.GetInstance().Refresh("bekhar");
+            EsClient.GetInstance(KharidName).Refresh(KharidName);
         }
 
         public static QueryContainer GetQuery(SearchParameter searchParameter)
@@ -135,7 +138,7 @@ namespace Bekhar.Elastic
 
         internal static Kala GetKalaById(string id)
         {
-            var response = EsClient.GetInstance().Search<Kala>(s => s.Query(q => q.Ids(ids => ids.Values(new List<Id>() { id }))));
+            var response = EsClient.GetInstance(KalaName).Search<Kala>(s => s.Query(q => q.Ids(ids => ids.Values(new List<Id>() { id }))));
             ValidateResponse(response);
 
             return response.Hits.First().Source;
