@@ -113,8 +113,8 @@ namespace Bekhar.Controllers
                 user.Money -= amount;
 
             manager.UpdateAsync(user);
-            var ctx = store.Context;
-            ctx.SaveChanges();
+            //var ctx = store.Context;
+            //ctx.SaveChanges();
         }
 
         // GET: Kharids/Edit/5
