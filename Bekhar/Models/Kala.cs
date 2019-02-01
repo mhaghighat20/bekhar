@@ -39,6 +39,8 @@ namespace Bekhar.Models
 
         public string Username { get; set; }
 
-        public ModelType Type { get; set; } = ModelType.Kala;
+        public string BuyTransactionId { get; set; }
+
+        public ModelType DataType { get; set; } = ModelType.Kala;
     }
 }

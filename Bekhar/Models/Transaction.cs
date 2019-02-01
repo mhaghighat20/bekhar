@@ -15,7 +15,7 @@ namespace Bekhar.Models
         [Display(Name = "مبلغ")]
         public long Amount { get; set; }
 
-        public ModelType Type { get; set; } = ModelType.Transaction;
+        public ModelType DataType { get; set; } = ModelType.Transaction;
     }
 
     public enum ModelType : byte
