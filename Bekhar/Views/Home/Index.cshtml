@@ -1,36 +1,47 @@
-﻿
+﻿@using Bekhar.Models
 @{
     Page.Title = "صفحه اصلی";
+    int selectedCat = -1;
+    if (Request.QueryString["cat"] != null)
+    {
+        selectedCat = int.Parse(Request.QueryString["cat"]);
+    }
 }
 
 <div class="wrapper">
     <!-- Sidebar Starts here -->
     <nav class="bk-sidebar pb-3">
-        <div class="bk-sidebar-header">
-            <h5>دسته بندی کالاها</h5>
-        </div>
+        @*<div class="bk-sidebar-header">
+            @if (selectedCat != -1)
+            {
+                <h5>@Utility.GetCategoryById(selectedCat).Name</h5>
+            }
+            else
+            {
+                <h5>دسته بندی کالا ها</h5>
+            }
+        </div>*@
 
         <ul class="list-group components">
             @{
-                var categories = Bekhar.Models.Utility.GetAllCategories();
+                List<Category> categories;
+                if (selectedCat != -1)
+                {
+                    categories = Utility.GetCategoryByParentId(selectedCat);
+                }
+                else
+                {
+                    categories = Utility.GetAllCategories();
+                }
+
             }
-            @foreach (Bekhar.Models.Category category in categories)
+            @foreach (Category category in categories)
             {
                 <li class="list-group-item sidebar-item">
-                    @if (@Request.QueryString["cat"] == @category.Id.ToString())
-                    {
-                        <a href="/?cat=@category.Id" selected="true">
-                            <span class="sidebar-item-text"> @category.Name </span>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="/?cat=@category.Id">
-                            <span class="sidebar-item-text"> @category.Name </span>
-                        </a>
-                    }
+                    <a href="/?cat=@category.Id">
+                        <span class="sidebar-item-text"> @category.Name </span>
+                    </a>
                 </li>
-
             }
             <!--
             <li class="list-group-item sidebar-item">
@@ -118,26 +129,45 @@
                         </div>
                     </div>
                     <div class="col">
-                        <button class="input-group-text deep-orange white-text px-4" onclick="document.getElementById('search-form').submit();" style="display:block;"><i class="fa fa-search"></i></button>
+                        <button class="input-group-text deep-orange white-text px-4" onclick="document.getElementById('search-form').submit();" style="display:block;">جستجو <i class="fa fa-search ml-2"></i></button>
                     </div>
                 </div>
 
             </div>
         </form>
+        
+        <div class="container d-flex flex-row-reverse justify-content-end">
+            @{
+                int cat = selectedCat;
+                if(cat != -1)
+                {
+                    while (Utility.GetCategoryById(cat).ParentId != null)
+                    {
+                        <span style="border-radius:0.5rem; border-color:#e5e9ec; background:#f5f9fe" class="ml-2 p-2"> > @Utility.GetCategoryById(cat).Name </span>
+                        cat = (int) Utility.GetCategoryById(selectedCat).ParentId;
+                    }
+                    <span style="border-radius:0.5rem; border-color:#e5e9ec; background:#f5f9fe" class="ml-2 p-2"> @Utility.GetCategoryById(cat).Name </span>
+                }
+            }
+            @if (selectedCat != -1)
+            {
+                <span style="border-radius:0.5rem; border-color:#c5c9cc; background:#f5f9fe" class="ml-2 p-2">دسته بندی ></span>
+            }
+        </div>
         <div class="card-deck">
             @foreach (var kala in Model)
             {
                 <div class="card my-3">
-                    <div class="view">
-                        <img src="https://via.placeholder.com/250" class="card-img-top" alt="" style="height:250px;">
+                    <div class="view" style="max-width:300px;">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="" style="max-height:300px;">
                     </div>
                     <div class="card-body">
                         <h4 class="card-title">@kala.Name</h4>
-                        <p class="card-text">@kala.Description</p>
+                        <p class="card-text" style="overflow:hidden;">@Utility.GetSummery(kala.Description)</p>
                     </div>
                     <div class="card-footer p-1 d-flex" style="background:white;">
-                        <div class="mr-auto my-auto pl-3 deep-orange-text">@kala.Price <span class="font-weight-bold">تومان</span></div>
-                        <a class="btn btn-deep-orange font-weight-bold" href="~/Kala/Details/@kala.Id">خرید</a>
+                        <div class="mr-auto my-auto pl-3 deep-orange-text">@Utility.GetCommaSeperatedNumber(kala.Price.ToString()) <span class="font-weight-bold">تومان</span></div>
+                        <a class="btn btn-outline-deep-orange font-weight-bold py-2 px-3" href="~/Kala/Details/@kala.Id">مشاهده کالا</a>
                     </div>
                 </div>
             }

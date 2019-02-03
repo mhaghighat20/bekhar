@@ -13,38 +13,6 @@
         </h3>
 
         <div class="jumbotron">      
-            <!--
-            <div>
-                تصاویر
-                <input type="file" class="form-control-file" style="direction: rtl">
-
-                <!--<label class="btn btn-outline-secondary active">-->
-                <!--<input type="radio" name="options" id="option1" autocomplete="off" checked>-->
-                <!--درخواستی-->
-                <!--</label>-->
-                <!--<input type="file" class="form-control-file" style="direction: rtl">-->
-
-            <!--
-            </div> -->
-
-            
-                        <!--
-
-            <div style="direction: rtl">
-                <label for="radioButton">نوع آگهی</label>
-
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="radioButton">
-                    <label class="btn btn-outline-secondary active">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                        درخواستی
-                    </label>
-                    <label class="btn btn-outline-secondary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> فروشی
-                    </label>
-                </div>
-            </div>
-            -->
-            
             <div class="row">
                 <div class="col-9">
                     <div class="form-group">
@@ -112,11 +80,26 @@
                     -->
 
             </div>
-            <div>
-                <div class="input-group">
-                    <input type="text" class="form-control" name="Price" placeholder="قیمت" />
-                    <div class="input-group-append">
-                        <span class="input-group-text">تومان</span>
+            <div class="row">
+                <div class="col-5">
+                    <label for="adPrice">قیمت</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="Price" id="adPrice" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">تومان</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <label for="inputGroupFile01">عکس</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label text-muted" for="inputGroupFile01">عکس مرتبط با آگهی را انتخاب کنید . . .</label>
+                        </div>
                     </div>
                 </div>
             </div>

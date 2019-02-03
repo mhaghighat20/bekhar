@@ -11,27 +11,30 @@
     <div class="card mt-3 w-75 mx-auto">
         <div class="card-header d-flex">
             <h5 class="text-center align-middle mt-2">
-                تراکنش های کاربر - (موجودی: @(ViewBag.Money))
+                تراکنش های کاربر
             </h5>
-            <a class="btn btn-success ml-auto my-0" href="/Transaction/Create">
+            <span class="btn-outline-info my-0 ml-auto p-2" style="cursor:default;">
+                موجودی فعلی : @ViewBag.Money تومان
+            </span>
+            <a class="btn btn-success ml-2 my-0" href="/Transaction/Create">
                 افزایش <i class="fas fa-plus align-middle ml-1" style="font-size:1rem"></i>
             </a>
         </div>
 
         
         <table class="table table-bordered table-striped">
-            <thead class="thead-light">
+            <thead>
                 <tr>
-                    <th class="col-1 text-center">
+                    <th class="col-1 text-center font-weight-bold">
                         #
                     </th>
-                    <th class="col-6">
+                    <th class="col-6 font-weight-bold">
                         @Html.DisplayNameFor(model => model.Amount)
                     </th>
-                    <th class="col-3">
+                    <th class="col-3 font-weight-bold">
                         @Html.DisplayNameFor(model => model.CreationTime)
                     </th>
-                    <th class="col-2">
+                    <th class="col-2 font-weight-bold">
                         اطلاعات
                     </th>
                 </tr>
@@ -45,7 +48,14 @@
                             @i
                         </td>
                         <td class="p-2 align-middle">
-                            @Html.DisplayFor(modelItem => item.Amount)
+                            @if (item.Amount < 0)
+                            {
+                                <span class="text-danger">@item.Amount تومان</span>
+                            }
+                            else
+                            {
+                                <span class="text-success">@item.Amount تومان</span>
+                            }
                         </td>
                         <td class="p-2 align-middle">
                             @item.CreationTime.GetPersianStr()
