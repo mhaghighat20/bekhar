@@ -58,5 +58,23 @@ namespace Bekhar.Models
             var v = dt;
             return $"{pc.GetYear(v)}-{pc.GetMonth(v)}-{pc.GetDayOfMonth(v)} {v.Hour}:{v.ToString("mm")}";
         }
+
+        public static string GetCommaSeperatedNumber(string num)
+        {
+            string t = "";
+            for (int i = num.Length; i >= 0; i -= 3)
+            {
+                if (i > 3)
+                    t = "," + num.Substring(i - 3, 3) + t;
+                else
+                    t = num.Substring(0, i) + t;
+            }
+            return t;
+        }
+
+        public static string GetSummery(string txt)
+        {
+            return txt.Substring(0, Math.Min(60, txt.Length - 1)) + (txt.Length >= 60 ? ". . ." : "");
+        }
     }
 }

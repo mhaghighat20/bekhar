@@ -40,15 +40,6 @@
                 </li>
             </ul>
 
-
-            
-
-            <!--
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="mdi mdi-menu-open"></i>
-            </button>
-            -->
-
             @if (!Request.IsAuthenticated)
             {
                 <a class="nav-link bk-nav-link ml-auto" href="~/Account/Register">ثبت نام</a>
@@ -71,10 +62,16 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <li class="dropdown-item" ><a href="/Manage">پروفایل</a></li>
+                            <li class="dropdown-header">امور مالی</li>
                             <li class="dropdown-item"><a href="/Transaction">لیست تراکنش ها</a></li>
-                            <li class="dropdown-item"><a href="/Kala">آگهی های من</a></li>
+                            <li class="dropdown-item"><a href="/Kharids">خریدهای من</a></li>
                             <li class="dropdown-divider"></li>
+                            <li class="dropdown-header">آگهی ها</li>
+                            <li class="dropdown-item"><a href="/Kala">آگهی های من</a></li>
+                            <li class="dropdown-item"><a href="/">تمامی آگهی ها</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-header">حساب کاربری</li>
+                            <li class="dropdown-item" ><a href="/Manage">پروفایل</a></li>
                             <li class="dropdown-item"><a href="javascript:document.getElementById('logoutForm').submit()">خروج</a></li>
                         </ul>
                     </div>
@@ -86,7 +83,7 @@
             }
         </nav>
     </header>
-    @RenderBody()
+    
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -94,6 +91,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.0/js/mdb.min.js" integrity="sha256-RyKFOSKnuKFSYAyJlfeHdb8ljBAbLJOSh9Bz8pzhhkY=" crossorigin="anonymous"></script>
     
     
+    @RenderBody()
+
     @*
     @{ var jq = "~/Content/js/jquery-3.3.1.min.js";
         var md = "~/Content/js/mdb.min.js";
