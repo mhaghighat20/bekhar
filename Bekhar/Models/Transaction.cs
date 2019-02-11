@@ -25,7 +25,8 @@ namespace Bekhar.Models
     {
         Kala,
         Transaction,
-        Kharid
+        Kharid,
+        Mozayede
     }
 
     public enum PurposeType : byte

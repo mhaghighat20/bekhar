@@ -13,7 +13,7 @@ namespace Bekhar.Controllers
     public class KalaController : Controller
     {
         private ApplicationUserManager _userManager;
-        public  ApplicationUserManager UserManager
+        public ApplicationUserManager UserManager
         {
             get
             {
@@ -68,13 +68,27 @@ namespace Bekhar.Controllers
 
         // POST: Kala/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Location,City,Category")] Kala kala)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Location,City,Category,DeadlineDate,DeadlineTime")] Kala kala)
         {
+            // TODO ولیدیشن ها چک شوند
             //if (ModelState.IsValid)
             {
                 kala.Username = User.Identity.Name;
                 kala.CreationTime = DateTime.Now;
-                ElasticEngine.AddKala(kala);
+
+                if (string.IsNullOrWhiteSpace(kala.DeadlineDate))
+                    ElasticEngine.AddKala(kala);
+                else
+                {
+                    kala.Deadline = Convert.ToDateTime(kala.DeadlineDate);
+                    if (!string.IsNullOrWhiteSpace(kala.DeadlineTime))
+                    {
+                        var time = kala.DeadlineTime.Split(':').Select(x => Convert.ToInt32(x)).ToList();
+                        kala.Deadline.Add(new TimeSpan(time[0], time[1], 0));
+                    }
+
+                    ElasticEngine.AddKala(kala);
+                }
                 return RedirectToAction("Index", "Home", null);
             }
 

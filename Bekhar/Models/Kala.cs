@@ -38,8 +38,33 @@ namespace Bekhar.Models
 
         public string Username { get; set; }
 
-        public string BuyTransactionId { get; set; }
+        public DateTime Deadline { get; set; }
+
+        [Display(Name="تاریخ پایان مزایده")]
+        public string DeadlineDate { get; set; }
+
+        [Display(Name = "زمان پایان مزایده")]
+        public string DeadlineTime { get; set; }
 
         public ModelType DataType { get; set; } = ModelType.Kala;
+
+        //public Mozayede ConvertToMozayede()
+        //{
+        //    return new Mozayede()
+        //    {
+        //        Id = Id,
+        //        Category = Category,
+        //        City = City,
+        //        CreationTime = CreationTime,
+        //        DataType = DataType,
+        //        Description = Description,
+        //        Email = Email,
+        //        Location = Location,
+        //        Mobile = Mobile,
+        //        Name = Name,
+        //        Price = Price,
+        //        Username = Username
+        //    };
+        //}
     }
 }
