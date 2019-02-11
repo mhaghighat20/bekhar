@@ -80,6 +80,7 @@ namespace Bekhar.Controllers
                     ElasticEngine.AddKala(kala);
                 else
                 {
+                    kala.DataType = ModelType.Mozayede;
                     kala.Deadline = Convert.ToDateTime(kala.DeadlineDate);
                     if (!string.IsNullOrWhiteSpace(kala.DeadlineTime))
                     {
