@@ -24,15 +24,55 @@
                 <div class="col-3">
                     <label for="category">دسته بندی</label>
                     <div class="input-group">
-                        <select class="browser-default custom-select" id="category" name="Category">
+                        <input type="hidden" value="" id="adCategory" name="Category" />
+                        <script>
+                            function updateCat(selectedCat)
+                            {
+                                // alert(JSON.stringify(data));
+                                // alert($("#category").children("option:selected").attr("value"));
+                                
+                                $("#adCategory").attr("value", selectedCat);//$("#category").children("option:selected").attr("value"));
+
+                                //if ($("#adCategory").attr("value") === null)
+                                //{
+                                //    $("#adCategory").attr("value", "")
+                                //}
+
+                                $.ajax({
+                                method: "POST",
+                                url: "/Kala/GetCategoryByParentId",
+                                data: { "id": selectedCat },
+                                success: function (result)
+                                {
+                                    $("#category").html("");
+                                    for (var i = 0; i < result.length; i++)
+                                    {
+                                        var cat = result[i];
+                                        $("#category").append("<option value='" + cat.id + "'>" + cat.Name + "</option>");
+                                    }
+                                },
+                                error: function (result)
+                                {
+                                    alert(result.status);
+                                }
+                                });
+                               
+                            }
+                            $(document).ready(function () {
+                            updateCat("");
+                            });
+                        </script>
+                        
+                        <select class="browser-default custom-select" id="category" onchange="alert($(this).val);" >
+                            
                             <option value="" selected disabled>دسته بندی کالا را انتخاب کنید</option>
-                            @{
+                            @*@{
                                 var categories = Bekhar.Models.Utility.GetAllCategories();
                             }
                             @foreach (var category in categories)
                             {
                                 <option value="@category.Id.ToString()" >@category.Name</option>
-                            }
+                            }*@
                         </select>
                     </div>
                 </div>
