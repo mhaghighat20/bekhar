@@ -1,89 +1,88 @@
-﻿@model Bekhar.Models.Kala
+﻿@using Bekhar.Models
+@model Bekhar.Models.Kala
+
 
 @{
-    ViewBag.Title = "Verification";
+    Page.Title = "تایید خرید";
 }
 
-<h2>تایید خرید کالا</h2>
+<div class="container mt-3">
+    <div class="card p-3 mx-auto" style="width:500px">
+        <table class="table">
+            <tr>
+                <td class="col-5 text-center font-weight-bold">
+                    عنوان کالا
+                </td>
+                <td class="col-7">
+                    @Model.Name
+                </td>
+            </tr>
 
+            <tr>
+                <td class="text-center font-weight-bold">
+                    دسته
+                </td>
+                <td>
+                    @Model.Category
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold">
+                    توضیحات کالا
+                </td>
+                <td>
+                    @Model.Description
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold">
+                   شهر و محله فروشنده
+                </td>
+                <td>
+                    @Model.City - @Model.Location
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold">
+                    نام فروشنده
+                </td>
+                <td>
+                    @Model.Username
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center font-weight-bold">
+                    شماره تماس فروشنده
+                </td>
+                <td>
+                    @Model.Mobile
+                </td>
+            </tr>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Kala</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <tr>
+                <td class="text-center font-weight-bold">
+                    قیمت کالا
+                </td>
+                <td>
+                    @Utility.GetCommaSeperatedNumber(Model.Price.ToString()) تومان
+                </td>
+            </tr>
+        </table>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Name)
-            </div>
-        </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Description)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Price)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Mobile)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Category)
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.City)
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Location)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Username)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="خرید" class="btn btn-default" />
-            </div>
+                <div class="d-flex justify-content-end">
+                    <a class="btn btn-outline-danger" href="/Kala/Details/@Request["KalaId"]">بازگشت</a>
+                    <input type="submit" value="خرید" class="btn btn-success" />
+                </div>
+            }
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
