@@ -39,7 +39,7 @@ namespace Bekhar.Models
 
         public string Username { get; set; }
 
-        public DateTime Deadline { get; set; }
+        public DateTime? Deadline { get; set; }
 
         [JsonIgnore]
         public long DeadlineTimeStamp => ((DateTimeOffset)Deadline).ToUnixTimeMilliseconds();
