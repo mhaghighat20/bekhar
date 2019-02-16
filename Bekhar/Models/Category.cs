@@ -12,6 +12,8 @@ namespace Bekhar.Models
 
         public int? ParentId { get; set; } = null;
 
+        public string FullName { get; set; }
+
         public Category(int? ParentId, int Id)
         {
             this.ParentId = ParentId;

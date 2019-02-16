@@ -219,6 +219,9 @@
     <Compile Include="Models\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\Kala\CategoryHandler.ashx.cs">
+      <DependentUpon>CategoryHandler.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\mdb.min.css" />
@@ -287,6 +290,7 @@
     <Content Include="Views\Kharids\Edit.cshtml" />
     <Content Include="Views\Kharids\Index.cshtml" />
     <Content Include="Views\Kharids\Create.cshtml" />
+    <Content Include="Views\Kala\CategoryHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
