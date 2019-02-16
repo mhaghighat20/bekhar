@@ -46,6 +46,16 @@ namespace Bekhar.Controllers
             return View(item);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult GetCategoryByParentId(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return Json(Utility.GetAllCategories());
+            else
+                return Json(Utility.GetCategoryByParentId(Convert.ToInt32(id)));
+        }
+
         public static Kala GetKala(string id, ApplicationUserManager userManager)
         {
             Kala item = ElasticEngine.GetKalaById(id);
