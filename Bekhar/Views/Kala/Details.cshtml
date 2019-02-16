@@ -10,7 +10,23 @@
         <div class="col-6">
             <h2>@Model.Name</h2>
             <p>تاریخ: @Model.CreationTime.GetPersianStr()</p>
-        
+            @if(Model.DataType == ModelType.Mozayede)
+            {
+            <span id="countdown">
+                زمان باقی مانده از مزایده: 
+                <span id="sec">
+
+                </span>
+                :
+                <span id="min">
+
+                </span>
+                :
+                <span id="hour">
+
+                </span>
+            </span>
+            }
             <table class="table">
 
 
@@ -52,3 +68,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        setInterval(function time() {
+            var d = new Date(@Model.DeadlineTimeStamp);
+            var hours = 23 - d.getHours();
+            var min = 60 - d.getMinutes();
+            if ((min + '').length == 1) {
+                min = '0' + min;
+            }
+            var sec = 60 - d.getSeconds();
+            if ((sec + '').length == 1) {
+                sec = '0' + sec;
+            }
+            jQuery('#countdown #hour').html(hours);
+            jQuery('#countdown #min').html(min);
+            jQuery('#countdown #sec').html(sec);
+        }, 1000);
+    });
+</script>
