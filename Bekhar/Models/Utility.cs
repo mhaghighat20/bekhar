@@ -74,6 +74,9 @@ namespace Bekhar.Models
 
         public static string GetSummery(string txt)
         {
+            if (string.IsNullOrEmpty(txt))
+                return "";
+
             return txt.Substring(0, Math.Min(60, txt.Length - 1)) + (txt.Length >= 60 ? ". . ." : "");
         }
     }

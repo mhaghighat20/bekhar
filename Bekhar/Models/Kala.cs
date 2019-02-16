@@ -42,7 +42,7 @@ namespace Bekhar.Models
         public DateTime? Deadline { get; set; }
 
         [JsonIgnore]
-        public long DeadlineTimeStamp => ((DateTimeOffset)Deadline).ToUnixTimeMilliseconds();
+        public long? DeadlineTimeStamp => ((Nullable<DateTimeOffset>)Deadline)?.ToUnixTimeMilliseconds();
 
         [Display(Name="تاریخ پایان مزایده")]
         public string DeadlineDate { get; set; }

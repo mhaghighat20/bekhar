@@ -95,7 +95,7 @@ namespace Bekhar.Controllers
                     if (!string.IsNullOrWhiteSpace(kala.DeadlineTime))
                     {
                         var time = kala.DeadlineTime.Split(':').Select(x => Convert.ToInt32(x)).ToList();
-                        kala.Deadline.Add(new TimeSpan(time[0], time[1], 0));
+                        kala.Deadline?.Add(new TimeSpan(time[0], time[1], 0));
                     }
 
                     ElasticEngine.AddKala(kala);
