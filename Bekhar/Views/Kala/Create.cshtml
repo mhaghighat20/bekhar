@@ -2,6 +2,7 @@
 
 @{
     Page.Title = "ثبت آگهی جدید";
+    Page.CustomCSS = "~/Content/css/create_kala.css";
 }
 
 @using (Html.BeginForm())
@@ -14,7 +15,7 @@
 
         <div class="jumbotron">      
             <div class="row">
-                <div class="col-9">
+                <div class="col-7">
                     <div class="form-group">
                         <label for="adTitle">عنوان آگهی</label>
                         <input type="text" class="form-control" name="Name">
@@ -35,11 +36,51 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="mozToggle">
+                            مزایده
+                        </label>
+                        <div class="input-group">
+                            <label class="switch">
+                                <input type="checkbox" class="primary" onchange="toggleMozayede(this);" id="mozToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    @*<label for="adType">نوع آگهی</label>
+                    <div class="input-group">
+                        <input type="checkbox" class="checkbox" onchange="toggleMozayede();" />
+                    </div>*@
+                </div>
+            </div>
+            <script>
+                function toggleMozayede(ch)
+                {
+                    // $("#moz").hidden = !$("#moz").hidden;
+                    document.getElementById("moz").style.display = ch.checked ? "flex" : "none";
+                    document.getElementById("adPriceLabel").innerHTML = ch.checked ? "قیمت پایه مزایده" : "قیمت";
+                }
+            </script>
+            <div id="moz" class="row" style="display: none;">
+                <div class="col-6">
+                    <label for="adDeadlineData">تاریخ اتمام مزایده</label>
+                    <div class="form-group">
+                        <input class="form-control" type="date" name="DeadlineData" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="adDeadlineTime">ساعت اتمام مزایده</label>
+                    <div class="form-group">
+                        <input class="form-control" type="time" name="DeadlineTime" />
+                    </div>
+                </div>
             </div>
 
             <div>
                 <div class="form-group">
-                    <label for="adDescription">توضیحات آگهی:</label>
+                    <label for="adDescription">توضیحات آگهی</label>
                     <textarea class="form-control" rows="5" name="Description"></textarea>
                 </div>
             </div>
@@ -82,7 +123,7 @@
             </div>
             <div class="row">
                 <div class="col-5">
-                    <label for="adPrice">قیمت</label>
+                    <label for="adPrice" id="adPriceLabel">قیمت</label>
                     <div class="input-group">
                         <input type="text" class="form-control" name="Price" id="adPrice" />
                         <div class="input-group-append">

@@ -15,37 +15,36 @@
 
 
                 <tr>
-                    <th>دسته بندی</th>
-                    <th> @Model.Category</th>
+                    <td class="text-center font-weight-bold">دسته بندی</td>
+                    <td> @Model.Category</td>
                 </tr>
 
                 <tr>
-                    <td>محل</td>
+                    <td class="text-center font-weight-bold">محل</td>
                     <td>@Model.City - @Model.Location</td>
                 </tr>
                 <tr>
-                    <td>نوع آگهی</td>
-                    <td>فروشی</td>
+                    <td class="text-center font-weight-bold">قیمت</td>
+                    <td>@Utility.GetCommaSeperatedNumber(Model.Price.ToString()) <span class="font-weight-bold">تومان</span></td>
                 </tr>
                 <tr>
-                    <td>قیمت</td>
-                    <td>@Model.Price <span class="font-weight-bold">تومان</span></td>
-                </tr>
-                <tr>
-                    <td>موبایل</td>
+                    <td class="text-center font-weight-bold">موبایل</td>
                     <td> @Model.Mobile </td>
                 </tr>
 
                 <tr>
-                    <td>ایمیل</td>
+                    <td class="text-center font-weight-bold">ایمیل</td>
                     <td> @Model.Email</td>
                 </tr>
 
             </table>
-            <p>توضیحات: 
+            <p><span class="font-weight-bold"> توضیحات: </span> 
                 @Model.Description
             </p>
-            <a href="/Kharids/Create?KalaId=@(Model.Id)">خرید</a>
+            <div class="text-center">
+                <a href="/Kharids/Create?KalaId=@(Model.Id)" class="btn btn-success">خرید</a>
+            </div>
+            
         </div>
         <div class="col-6 ">
             <img src="https://via.placeholder.com/450" class="rounded" style="width:inherit;">
