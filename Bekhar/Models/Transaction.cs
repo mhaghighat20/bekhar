@@ -33,7 +33,8 @@ namespace Bekhar.Models
     {
         ChargeAccount,
         Buy,
-        Sell
+        Sell,
+        Offer
     }
 
     public class ElasticDocument

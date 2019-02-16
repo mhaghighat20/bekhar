@@ -37,18 +37,36 @@ namespace Bekhar.Controllers
             var items = ElasticEngine.GetKharidByUserName(username);
 
             foreach (var item in items)
+            {
                 item.canBeApproved = CanBeApproved(username, item);
-
-            foreach (var item in items)
                 item.buyOrSell = item.KharidarUsername == username;
+                item.canBeCancelled = CanBeCancelled(username, item);
+            }
 
             return View(items);
+        }
+
+        private static bool CanBeCancelled(string username, Kharid item)
+        {
+            if (item.KharidarUsername == username)
+                if (item.State == KharidState.Winner)
+                    return true;
+
+            if (item.ForoshandeUsername == username)
+                if (item.State == KharidState.Winner)
+                    return true;
+
+            return false;
         }
 
         private static bool CanBeApproved(string username, Kharid item)
         {
             if (item.KharidarUsername == username)
                 if (item.State == KharidState.WaitForApprove)
+                    return true;
+
+            if (item.ForoshandeUsername == username)
+                if (item.State == KharidState.Winner)
                     return true;
 
             return false;
@@ -111,7 +129,15 @@ namespace Bekhar.Controllers
                 CreationTime = DateTime.Now,
             };
 
-            ChangeUserMoney(User.Identity.Name, kala.Price.Value, false);
+
+            if (kala.DataType == ModelType.Mozayede)
+            {
+                kharid.State = KharidState.OfferBid;
+                transaction.Amount = -kala.Price.Value / 10; // ده درصد ودیعه
+                transaction.Purpose = PurposeType.Offer;
+            }
+
+            ChangeUserMoney(User.Identity.Name, Math.Abs(transaction.Amount), false);
             ElasticEngine.AddKharid(kharid);
             ElasticEngine.AddTranasction(transaction);
 
@@ -144,7 +170,7 @@ namespace Bekhar.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            
+
             Kharid kharid = ElasticEngine.GetKharidById(id);
             if (kharid == null)
                 return HttpNotFound();
