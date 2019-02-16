@@ -94,12 +94,10 @@ namespace Bekhar.Elastic
         static string KharidName = typeof(Kharid).Name.ToLower();
         public static void AddKala(Kala kala)
         {
-            IIndexResponse response = null;
-
             kala.DeadlineDate = null;
             kala.DeadlineTime = null;
 
-            EsClient.GetInstance(KalaName).IndexDocument(kala);
+            var response = EsClient.GetInstance(KalaName).IndexDocument(kala);
             ValidateResponse(response);
             EsClient.GetInstance(KalaName).Refresh(KalaName);
         }

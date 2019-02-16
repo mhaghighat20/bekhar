@@ -38,7 +38,7 @@ namespace Bekhar.Models
 
         public string Username { get; set; }
 
-        public DateTime Deadline { get; set; }
+        public DateTime? Deadline { get; set; }
 
         [Display(Name="تاریخ پایان مزایده")]
         public string DeadlineDate { get; set; }
