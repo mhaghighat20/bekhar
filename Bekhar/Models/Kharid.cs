@@ -29,6 +29,9 @@ namespace Bekhar.Models
         [JsonIgnore]
         public bool buyOrSell;
 
+        [JsonIgnore]
+        public bool canBeCancelled;
+
         [Display(Name = "نوع معامله")]
         public ModelType DataType { get; set; } = ModelType.Kharid;
     }
@@ -37,7 +40,12 @@ namespace Bekhar.Models
     {
         // دقت کنید خریدار اپروو می کند
         WaitForApprove,
-        Completed
+        Completed,
+        OfferBid,
+        Winner,
+        Loser,
+        CancelledByWinner,
+        CancelledByOwner
     }
 
 }
