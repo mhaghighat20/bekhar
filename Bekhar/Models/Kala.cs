@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -39,6 +40,9 @@ namespace Bekhar.Models
         public string Username { get; set; }
 
         public DateTime? Deadline { get; set; }
+
+        [JsonIgnore]
+        public long? DeadlineTimeStamp => ((Nullable<DateTimeOffset>)Deadline)?.ToUnixTimeMilliseconds();
 
         [Display(Name="تاریخ پایان مزایده")]
         public string DeadlineDate { get; set; }

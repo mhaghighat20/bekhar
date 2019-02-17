@@ -174,10 +174,14 @@
                         <h4 class="card-title">@kala.Name</h4>
                         <p class="card-text" style="overflow:hidden;">@Utility.GetSummery(kala.Description)</p>
                     </div>
+                    <div class="card-footer p-1 d-flex justify-content-center">
+
+                    </div>
                     <div class="card-footer p-1 d-flex" style="background:white;">
                         <div class="mr-auto my-auto pl-3 deep-orange-text">@Utility.GetCommaSeperatedNumber(kala.Price.ToString()) <span class="font-weight-bold">تومان</span></div>
                         <a class="btn btn-outline-deep-orange font-weight-bold py-2 px-3" href="~/Kala/Details/@kala.Id">مشاهده کالا</a>
                     </div>
+                    
                 </div>
             }
         </div>
