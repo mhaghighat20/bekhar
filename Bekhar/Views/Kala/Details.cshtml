@@ -76,13 +76,14 @@
     $(document).ready(function () {
         setInterval(function time() {
             var d = new Date(@Model.DeadlineTimeStamp) - new Date();
-            var days = d.days;// @(Model.Deadline.Value.Subtract(DateTime.Now).Days);
-            var hours = d.hours; // @(Model.Deadline.Value.Subtract(DateTime.Now).Hours);
-            var min = d.min;// @(Model.Deadline.Value.Subtract(DateTime.Now).Minutes);
+            var days = d.days;// @(Model.Deadline?.Subtract(DateTime.Now).Days);
+            var hours = d.hours; // @(Model.Deadline?.Subtract(DateTime.Now).Hours);
+            var min = d.min;// @(Model.Deadline?.Subtract(DateTime.Now
+                               ).Minutes);
             if ((min + '').length == 1) {
                 min = '0' + min;
             }
-            var sec = d.sec;// @(Model.Deadline.Value.Subtract(DateTime.Now).Seconds);
+            var sec = d.sec;// @(Model.Deadline?.Subtract(DateTime.Now).Seconds);
             if ((sec + '').length == 1) {
                 sec = '0' + sec;
             }

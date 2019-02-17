@@ -39,6 +39,8 @@ namespace Bekhar.Models
 
         public string Username { get; set; }
 
+        public HttpPostedFileBase file { get; set; }
+
         public DateTime? Deadline { get; set; }
 
         [JsonIgnore]
@@ -49,6 +51,8 @@ namespace Bekhar.Models
 
         [Display(Name = "زمان پایان مزایده")]
         public string DeadlineTime { get; set; }
+
+        public string IsTabligh { get; set; }
 
         public ModelType DataType { get; set; } = ModelType.Kala;
 

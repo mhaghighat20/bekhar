@@ -88,11 +88,24 @@
                             </label>
                         </div>
                     </div>
-                    
+
+                    <div class="form-group">
+                        <label for="mozToggle">
+                            تبلیغ در سامانه
+                        </label>
+                        <div class="input-group">
+                            <label class="switch">
+                                <input type="hidden" value="false" id="adTabligh" name="IsTabligh" />
+                                <input type="checkbox" class="primary" onchange="toggleTabligh(this);">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
                     @*<label for="adType">نوع آگهی</label>
-                    <div class="input-group">
-                        <input type="checkbox" class="checkbox" onchange="toggleMozayede();" />
-                    </div>*@
+        <div class="input-group">
+            <input type="checkbox" class="checkbox" onchange="toggleMozayede();" />
+        </div>*@
                 </div>
             </div>
             <script>
@@ -101,6 +114,10 @@
                     // $("#moz").hidden = !$("#moz").hidden;
                     document.getElementById("moz").style.display = ch.checked ? "flex" : "none";
                     document.getElementById("adPriceLabel").innerHTML = ch.checked ? "قیمت پایه مزایده" : "قیمت";
+                }
+
+                function toggleTabligh(ch) {
+                    document.getElementById("adTabligh").val(ch.checked);
                 }
             </script>
             <div id="moz" class="row" style="display: none;">
@@ -178,7 +195,7 @@
                             <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-upload"></i></span>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <input type="file" name="myfile" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                             <label class="custom-file-label text-muted" for="inputGroupFile01">عکس مرتبط با آگهی را انتخاب کنید . . .</label>
                         </div>
                     </div>

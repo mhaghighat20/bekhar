@@ -78,13 +78,39 @@ namespace Bekhar.Controllers
 
         // POST: Kala/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Location,City,Category,DeadlineDate,DeadlineTime")] Kala kala)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Location,City,Category,DeadlineDate,DeadlineTime,IsTabligh")] Kala kala)
         {
             // TODO ولیدیشن ها چک شوند
             //if (ModelState.IsValid)
             {
                 kala.Username = User.Identity.Name;
                 kala.CreationTime = DateTime.Now;
+
+                if (kala.file != null)
+                {
+                    var fileName = System.Guid.NewGuid().ToString() + System.IO.Path.GetExtension(kala.file.FileName);
+                    string physicalPath = Server.MapPath("~/Images/Uploads" + fileName);
+                    // save image in folder
+                    kala.file.SaveAs(physicalPath);
+                }
+
+                if (kala.IsTabligh == "true")
+                {
+                    var money = GetUserMoney(User.Identity.Name);
+
+                    if (!HaveEnoughMoney(kala.Price.Value, User.Identity.Name))
+                        return RedirectToAction("Create", "Transaction", null);
+
+                    var transaction = new Transaction()
+                    {
+                        Amount = -5000,
+                        Purpose = PurposeType.Tabligh,
+                        Username = User.Identity.Name,
+                        CreationTime = DateTime.Now,
+                    };
+
+                    KharidsController.ChangeUserMoney(User.Identity.Name, Math.Abs(transaction.Amount), false);
+                }
 
                 if (string.IsNullOrWhiteSpace(kala.DeadlineDate))
                     ElasticEngine.AddKala(kala);
@@ -100,8 +126,23 @@ namespace Bekhar.Controllers
 
                     ElasticEngine.AddKala(kala);
                 }
+
                 return RedirectToAction("Index", "Home", null);
             }
+        }
+
+        private bool HaveEnoughMoney(long price, string username)
+        {
+            var money = GetUserMoney(username);
+
+            if (price > money)
+                return false;
+
+            return true;
+        }
+        public long GetUserMoney(string userName)
+        {
+            return UserManager.FindByNameAsync(userName).Result.Money;
         }
 
         // GET: Kala/Edit/5
