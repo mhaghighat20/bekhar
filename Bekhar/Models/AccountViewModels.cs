@@ -89,6 +89,8 @@ namespace Bekhar.Models
         [Display(Name = "تکرار رمز عبور")]
         [Compare("Password", ErrorMessage = "رمز عبور و تکرار آن یکسان نیستند.")]
         public string ConfirmPassword { get; set; }
+
+        public string Moaref { get; set; }
     }
 
     public class ResetPasswordViewModel

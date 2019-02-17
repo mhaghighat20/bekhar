@@ -140,6 +140,7 @@ namespace Bekhar.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Moaref = Request.QueryString["Moaref"];
             return View();
         }
 
@@ -152,7 +153,6 @@ namespace Bekhar.Controllers
         {
             if (ModelState.IsValid)
             {
-                var moaref = Request.QueryString["Moaref"];
 
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, MyName = model.Name, Money = 0 };
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -166,9 +166,9 @@ namespace Bekhar.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    if (moaref != null)
+                    if (model.Moaref != null)
                     {
-                        var moarefUser = UserManager.FindById(moaref);
+                        var moarefUser = UserManager.FindById(model.Moaref);
                         var transaction = new Transaction()
                         {
                             Amount = 5000,
@@ -178,7 +178,7 @@ namespace Bekhar.Controllers
                         };
 
                         ElasticEngine.AddTranasction(transaction);
-                        KharidsController.ChangeUserMoney(moarefUser.UserName, Math.Abs(transaction.Amount), false);
+                        KharidsController.ChangeUserMoney(moarefUser.UserName, Math.Abs(transaction.Amount), true);
 
                     }
 
