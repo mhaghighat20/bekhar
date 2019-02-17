@@ -109,27 +109,35 @@ namespace Bekhar.Controllers
             var kala = KalaController.GetKala(kalaId, UserManager);
             var money = GetUserMoney(User.Identity.Name);
 
-            if (kala.Price > money)
+            if (!HaveEnoughMoney(kala.Price.Value, User.Identity.Name))
                 return RedirectToAction("Create", "Transaction", null);
 
-            var kharid = new Kharid()
+            Kharid kharid;
+            Transaction transaction;
+            GenerateKharid(kalaId, kala, out kharid, out transaction, User.Identity.Name);
+            ElasticEngine.AddKharid(kharid);
+            ElasticEngine.AddTranasction(transaction);
+
+            return RedirectToAction("Index");
+        }
+
+        public void GenerateKharid(string kalaId, Kala kala, out Kharid kharid, out Transaction transaction, string username, long? currentMoney = null)
+        {
+            kharid = new Kharid()
             {
                 ForoshandeUsername = kala.Username,
-                KharidarUsername = User.Identity.Name,
+                KharidarUsername = username,
                 KalaId = kalaId,
                 State = KharidState.WaitForApprove,
                 CreationTime = DateTime.Now
             };
-
-            var transaction = new Transaction()
+            transaction = new Transaction()
             {
                 Amount = -kala.Price.Value,
                 Purpose = PurposeType.Buy,
-                Username = User.Identity.Name,
+                Username = username,
                 CreationTime = DateTime.Now,
             };
-
-
             if (kala.DataType == ModelType.Mozayede)
             {
                 kharid.State = KharidState.OfferBid;
@@ -137,16 +145,28 @@ namespace Bekhar.Controllers
                 transaction.Purpose = PurposeType.Offer;
             }
 
-            ChangeUserMoney(User.Identity.Name, Math.Abs(transaction.Amount), false);
-            ElasticEngine.AddKharid(kharid);
-            ElasticEngine.AddTranasction(transaction);
-
-            return RedirectToAction("Index");
+            if (currentMoney.HasValue)
+            {
+                if (currentMoney < Math.Abs(transaction.Amount))
+                    throw new InvalidOperationException("no enough money");
+            }
+            else
+                ChangeUserMoney(username, Math.Abs(transaction.Amount), false);
         }
 
-        private long GetUserMoney(string userName)
+        public long GetUserMoney(string userName)
         {
             return UserManager.FindByNameAsync(userName).Result.Money;
+        }
+
+        private bool HaveEnoughMoney(long price, string username)
+        {
+            var money = GetUserMoney(username);
+
+            if (price > money)
+                return false;
+
+            return true;
         }
 
         public static void ChangeUserMoney(string username, long amount, bool increaseOrDecrease)

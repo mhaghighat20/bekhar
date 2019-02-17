@@ -1,4 +1,5 @@
-﻿using Bekhar.Models;
+﻿using Bekhar.Controllers;
+using Bekhar.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace Bekhar.Tests.Models
     [TestClass]
     public class KalaTests
     {
+        public long? MockedUserMoney = 1;
+
         [TestMethod]
         public void NotBidTest()
         {
@@ -26,6 +29,84 @@ namespace Bekhar.Tests.Models
 
             Assert.IsTrue(kala.DataType == ModelType.Mozayede);
             Assert.IsNotNull(kala.Deadline);
+        }
+
+
+        [ExpectedException(typeof(InvalidOperationException))]
+        [TestMethod]
+        public void DoInvalidBuy()
+        {
+            Kharid kharid;
+            Transaction transaction;
+            var controller = new KharidsController();
+
+            var kala = new Kala()
+            {
+                Username = "testUser",
+                Price = 10,
+            };
+
+            controller.GenerateKharid("id5", kala, out kharid, out transaction, "testUser2", MockedUserMoney);
+        }
+
+        [ExpectedException(typeof(InvalidOperationException))]
+        [TestMethod]
+        public void DoInvalidBid()
+        {
+            Kharid kharid;
+            Transaction transaction;
+            var controller = new KharidsController();
+
+            var kala1 = new Kala()
+            {
+                Username = "testUser",
+                Price = 10,
+                DataType = ModelType.Mozayede
+            };
+
+            var kala2 = new Kala()
+            {
+                Username = "testUser",
+                Price = 10,
+                DataType = ModelType.Mozayede
+            };
+
+            controller.GenerateKharid("id5", kala1, out kharid, out transaction, "testUser2", MockedUserMoney);
+            controller.GenerateKharid("id5", kala2, out kharid, out transaction, "testUser2", MockedUserMoney - kala1.Price.Value);
+        }
+
+        [TestMethod]
+        public void DoValidBid()
+        {
+            Kharid kharid;
+            Transaction transaction;
+            var controller = new KharidsController();
+
+            var kala1 = new Kala()
+            {
+                Username = "testUser",
+                Price = 10,
+                DataType = ModelType.Mozayede
+            };
+
+            controller.GenerateKharid("id5", kala1, out kharid, out transaction, "testUser2", MockedUserMoney);
+        }
+
+        [TestMethod]
+        public void DoValidBuy()
+        {
+            Kharid kharid;
+            Transaction transaction;
+            var controller = new KharidsController();
+
+            var kala1 = new Kala()
+            {
+                Username = "testUser",
+                Price = 1,
+                DataType = ModelType.Mozayede
+            };
+
+            controller.GenerateKharid("id5", kala1, out kharid, out transaction, "testUser2", MockedUserMoney);
         }
 
 
