@@ -41,7 +41,8 @@ namespace Bekhar.Controllers
         [AllowAnonymous]
         public ActionResult Details(string id)
         {
-            Kala item = GetKala(id, UserManager);
+            var showUser = !string.IsNullOrEmpty(User.Identity.Name);
+            Kala item = GetKala(id, UserManager, showUser);
 
             return View(item);
         }
@@ -56,16 +57,20 @@ namespace Bekhar.Controllers
                 return Json(Utility.GetCategoryByParentId(Convert.ToInt32(id)));
         }
 
-        public static Kala GetKala(string id, ApplicationUserManager userManager)
+        public static Kala GetKala(string id, ApplicationUserManager userManager, bool showUser = true)
         {
             Kala item = ElasticEngine.GetKalaById(id);
 
             if (int.TryParse(item.Category, out var catId))
                 item.Category = Utility.GetCategoryById(catId).Name;
 
-            var user = userManager.FindByNameAsync(item.Username).Result;
-            item.Mobile = user.PhoneNumber;
-            item.Email = user.Email;
+            if (showUser)
+            {
+                var user = userManager.FindByNameAsync(item.Username).Result;
+                item.Mobile = user.PhoneNumber;
+                item.Email = user.Email;
+            }
+
             item.Id = id;
             return item;
         }

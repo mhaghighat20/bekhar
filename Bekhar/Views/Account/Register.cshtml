@@ -21,6 +21,7 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary("", new { @class = "text-danger" })
 
+                    <input type="hidden" name="Moaref" value="@ViewBag.Moaref"/>
                     <div class="input-group mb-3">
                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control input_user flex-grow-0", @placeholder="نام" })
                         <div class="input-group-append">
