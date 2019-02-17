@@ -30,6 +30,7 @@ namespace Bekhar.Controllers
         {
             var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
             ViewBag.Money = user.Money;
+            ViewBag.Moaref = user.Id;
             List<Transaction> items = ElasticEngine.GetTransactionByUsername(User.Identity.Name).OrderByDescending(x => x.CreationTime).ToList();
             return View(items);
         }

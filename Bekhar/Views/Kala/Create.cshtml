@@ -13,7 +13,7 @@
             ثبت آگهی جدید
         </h3>
 
-        <div class="jumbotron">      
+        <div class="jumbotron">
             <div class="row">
                 <div class="col-7">
                     <div class="form-group">
@@ -24,55 +24,56 @@
                 <div class="col-3">
                     <label for="category">دسته بندی</label>
                     <div class="input-group">
-                        <input type="hidden" value="" id="adCategory" name="Category" />
-                        <script>
-                            function updateCat(selectedCat)
-                            {
-                                // alert(JSON.stringify(data));
-                                // alert($("#category").children("option:selected").attr("value"));
-                                
-                                $("#adCategory").attr("value", selectedCat);//$("#category").children("option:selected").attr("value"));
-
-                                //if ($("#adCategory").attr("value") === null)
-                                //{
-                                //    $("#adCategory").attr("value", "")
-                                //}
-
-                                $.ajax({
-                                method: "POST",
-                                url: "/Kala/GetCategoryByParentId",
-                                data: { "id": selectedCat },
-                                success: function (result)
-                                {
-                                    $("#category").html("");
-                                    for (var i = 0; i < result.length; i++)
+                        <select class="browser-default custom-select" id="category" name="Category">
+                            @*<input type="hidden" value="" id="adCategory" name="Category" />
+                                <script>
+                                    function updateCat(selectedCat)
                                     {
-                                        var cat = result[i];
-                                        $("#category").append("<option value='" + cat.id + "'>" + cat.Name + "</option>");
+                                        // alert(JSON.stringify(data));
+                                        // alert($("#category").children("option:selected").attr("value"));
+
+                                        $("#adCategory").attr("value", selectedCat);//$("#category").children("option:selected").attr("value"));
+
+                                        //if ($("#adCategory").attr("value") === null)
+                                        //{
+                                        //    $("#adCategory").attr("value", "")
+                                        //}
+
+                                        $.ajax({
+                                        method: "POST",
+                                        url: "/Kala/GetCategoryByParentId",
+                                        data: { "id": selectedCat },
+                                        success: function (result)
+                                        {
+                                            $("#category").html("");
+                                            for (var i = 0; i < result.length; i++)
+                                            {
+                                                var cat = result[i];
+                                                $("#category").append("<option value='" + cat.id + "'>" + cat.Name + "</option>");
+                                            }
+                                        },
+                                        error: function (result)
+                                        {
+                                            alert(result.status);
+                                        }
+                                        });
+
                                     }
-                                },
-                                error: function (result)
-                                {
-                                    alert(result.status);
-                                }
-                                });
-                               
-                            }
-                            $(document).ready(function () {
-                            updateCat("");
-                            });
-                        </script>
-                        
-                        <select class="browser-default custom-select" id="category" onchange="alert($(this).val);" >
-                            
+                                    $(document).ready(function () {
+                                    updateCat("");
+                                    });
+                                </script>
+
+                                <select class="browser-default custom-select" id="category" onchange="alert($(this).val);" >*@
+
                             <option value="" selected disabled>دسته بندی کالا را انتخاب کنید</option>
-                            @*@{
+                            @{
                                 var categories = Bekhar.Models.Utility.GetAllCategories();
                             }
                             @foreach (var category in categories)
                             {
-                                <option value="@category.Id.ToString()" >@category.Name</option>
-                            }*@
+                                <option value="@category.Id.ToString()">@category.Name</option>
+                            }
                         </select>
                     </div>
                 </div>
@@ -95,7 +96,7 @@
                         </label>
                         <div class="input-group">
                             <label class="switch">
-                                <input type="hidden" value="false" id="adTabligh" name="IsTabligh" />
+                                <input type="hidden" id="adTabligh" name="IsTabligh" />
                                 <input type="checkbox" class="primary" onchange="toggleTabligh(this);">
                                 <span class="slider"></span>
                             </label>
@@ -103,21 +104,20 @@
                     </div>
 
                     @*<label for="adType">نوع آگهی</label>
-        <div class="input-group">
-            <input type="checkbox" class="checkbox" onchange="toggleMozayede();" />
-        </div>*@
+                        <div class="input-group">
+                            <input type="checkbox" class="checkbox" onchange="toggleMozayede();" />
+                        </div>*@
                 </div>
             </div>
             <script>
-                function toggleMozayede(ch)
-                {
+                function toggleMozayede(ch) {
                     // $("#moz").hidden = !$("#moz").hidden;
                     document.getElementById("moz").style.display = ch.checked ? "flex" : "none";
                     document.getElementById("adPriceLabel").innerHTML = ch.checked ? "قیمت پایه مزایده" : "قیمت";
                 }
 
                 function toggleTabligh(ch) {
-                    document.getElementById("adTabligh").val(ch.checked);
+                    $("#adTabligh").val(ch.checked);
                 }
             </script>
             <div id="moz" class="row" style="display: none;">
@@ -201,7 +201,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row mr-1" style="direction:ltr;">
                 <input type="submit" class="btn deep-orange" value="ثبت آگهی" />
             </div>

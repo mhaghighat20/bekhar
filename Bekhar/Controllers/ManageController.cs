@@ -72,6 +72,7 @@ namespace Bekhar.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+            ViewBag.Moaref = User.Identity.GetUserId();
             return View(model);
         }
 

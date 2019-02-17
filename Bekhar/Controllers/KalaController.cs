@@ -109,6 +109,7 @@ namespace Bekhar.Controllers
                         CreationTime = DateTime.Now,
                     };
 
+                    ElasticEngine.AddTranasction(transaction);
                     KharidsController.ChangeUserMoney(User.Identity.Name, Math.Abs(transaction.Amount), false);
                 }
 
