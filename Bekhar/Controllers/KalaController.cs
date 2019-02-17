@@ -70,6 +70,11 @@ namespace Bekhar.Controllers
                 item.Mobile = user.PhoneNumber;
                 item.Email = user.Email;
             }
+            else
+            {
+                item.Mobile = "وارد شوید";
+                item.Email = "وارد شوید";
+            }
 
             item.Id = id;
             return item;
