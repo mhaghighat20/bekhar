@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Bekhar.Models;
+using Bekhar.Elastic;
 
 namespace Bekhar.Controllers
 {
@@ -151,18 +152,36 @@ namespace Bekhar.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var moaref = Request.QueryString["Moaref"]
+                var moaref = Request.QueryString["Moaref"];
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, MyName = model.Name, Money = 0 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    if (moaref != null)
+                    {
+                        var moarefUser = UserManager.FindById(moaref);
+                        var transaction = new Transaction()
+                        {
+                            Amount = 5000,
+                            Purpose = PurposeType.Moarefi,
+                            Username = moarefUser.UserName,
+                            CreationTime = DateTime.Now,
+                        };
+
+                        ElasticEngine.AddTranasction(transaction);
+                        KharidsController.ChangeUserMoney(moarefUser.UserName, Math.Abs(transaction.Amount), false);
+
+                    }
+
 
                     return RedirectToAction("Index", "Home");
                 }
